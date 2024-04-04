@@ -1,0 +1,173 @@
+table {
+  margin: 1rem 0 0 0;
+  width: 100%;
+  border-collapse: collapse;
+  overflow: auto;
+}
+
+tbody {
+  border-bottom: 1px solid #00000033;
+}
+
+th {
+  background-color: #022e6c;
+  color: #fff;
+  font-size: 20px;
+}
+
+tr {
+  height: 5rem;
+}
+
+td {
+  text-align: center;
+  justify-content: row;
+  padding: 10px 14px;
+}
+
+.Table-Element {
+  background-color: #022e6c;
+  border-left: #00000033 solid 1px;
+  border-right: #00000033 solid 1px;
+  font-size: 17px;
+
+  .more {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--second-color);
+    }
+  }
+}
+
+.search-product-admin {
+  margin: auto;
+  margin-bottom: 10px;
+  .search {
+    width: 45rem;
+    height: 4.5rem;
+    background-color: #fff;
+    padding-left: 2rem;
+    border-radius: 10rem;
+    border: 0.1rem solid #adadad;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &:focus-within {
+      border-color: #3e334e;
+    }
+
+    input {
+      margin-right: 28px;
+      font-size: 1.8rem;
+      padding: 1rem 0;
+      flex: 1;
+      height: 100%;
+      border: none;
+      caret-color: var(--second-color);
+    }
+
+    .searchClear {
+      position: absolute;
+      right: 11%;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--second-color);
+      font-size: 1.5rem;
+    }
+    .searchBtn {
+      font-size: 2rem;
+      padding: 0 1rem;
+      color: var(--second-color);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.time-report-container {
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+
+  .time-report-content {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+
+    .time-report-start {
+      position: relative;
+      .error-message {
+        position: absolute;
+        width: 400px;
+        left: 0;
+        bottom: -28px;
+        font-size: 18px;
+        margin-top: 6px;
+        color: red;
+      }
+    }
+
+    .time-report-end {
+      position: relative;
+      .error-message {
+        position: absolute;
+        width: 400px;
+        bottom: -28px;
+        left: 0;
+        font-size: 18px;
+        margin-top: 6px;
+        color: red;
+      }
+    }
+
+    .date-picker {
+      width: 100%;
+      font-size: var(--text-fontSize);
+      background-color: #f0f0f0;
+      color: rgba(0, 0, 0, 0.6);
+      margin-top: 10px;
+      padding: 1rem;
+      border-radius: 10px;
+
+      .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+        font-size: var(--text-fontSize);
+        color: #1f1f1f;
+        font-weight: 500;
+      }
+
+      .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+        padding: 0;
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      .css-i4bv87-MuiSvgIcon-root {
+        font-size: 3rem;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      .MuiOutlinedInput-notchedOutline {
+        border: none !important;
+      }
+    }
+  }
+  .btn-report {
+    margin-top: auto;
+    font-size: 2rem;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.6);
+    background-color: #ffc436;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
+}

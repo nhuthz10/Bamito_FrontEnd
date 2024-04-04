@@ -1,0 +1,53 @@
+.introduce-badminton {
+  margin-bottom: 100px;
+  .introduce-badminton-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    .introduce-badminton-header-title {
+      font-size: var(--title-fontSize);
+      margin: 0;
+      font-weight: 600;
+    }
+    .introduce-badminton-header-more {
+      font-size: var(--text-fontSize);
+      margin-left: auto;
+      font-weight: 500;
+      color: var(--primary-color);
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+  .introduce-badminton-item {
+    cursor: pointer;
+    .introduce-badminton-item-img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      border-radius: 15px;
+      box-shadow: 0px 4px 4px 0px #00000040;
+    }
+    .introduce-badminton-item-name {
+      line-height: 1.4;
+      min-height: 48px;
+      font-size: var(--text-fontSize);
+      margin: 24px 0 8px 0;
+      font-weight: 600;
+    }
+    .introduce-badminton-item-rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: var(--text-fontSize);
+    }
+    .introduce-badminton-item-price {
+      display: flex;
+      font-size: var(--text-fontSize);
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+  }
+}

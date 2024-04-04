@@ -1,0 +1,54 @@
+.feedback-container {
+  .comment-rating-form {
+    margin: 30px 0 10px 0;
+    padding: 0 100px;
+    min-height: 500px;
+
+    .review-item {
+      background: #eee;
+      padding: 40px 30px;
+      margin-bottom: 16px;
+      border-radius: 20px;
+      position: relative;
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        .user-avatar {
+          height: 60px;
+          width: 60px;
+          object-fit: cover;
+          border-radius: 100%;
+          margin-right: 20px;
+        }
+        .wrap-user-name {
+          font-size: 2rem;
+          display: flex;
+          flex-direction: column;
+          .user-name {
+            margin-bottom: 6px;
+          }
+        }
+      }
+      .user-comment {
+        font-size: 2rem;
+      }
+      .edit-feedback {
+        position: absolute;
+        bottom: 10px;
+        right: 14px;
+        display: flex;
+        font-size: 1.8rem;
+
+        .edit-feedback-btn {
+          padding: 6px 8px;
+
+          &:hover {
+            cursor: pointer;
+            color: var(--second-color);
+          }
+        }
+      }
+    }
+  }
+}

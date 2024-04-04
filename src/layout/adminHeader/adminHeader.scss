@@ -1,0 +1,41 @@
+.admin-header-container {
+  width: 100%;
+  height: 7rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10rem;
+  position: fixed;
+  z-index: 999;
+
+  background-color: var(--primary-admin-color);
+  -webkit-box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.5);
+
+  .logo {
+    // height: 50px;
+    // width: 50px;
+    // border-radius: 100%;
+    // object-fit: cover;
+  }
+
+  .admin-info {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    .admin-avatar {
+      height: 50px;
+      width: 50px;
+      border-radius: 100%;
+      object-fit: cover;
+    }
+    .admin-name {
+      font-size: var(--text-fontSize);
+      color: white;
+      margin-right: 16px;
+    }
+  }
+}

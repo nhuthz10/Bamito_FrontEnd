@@ -1,0 +1,16 @@
+.Modal-Global {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    .Modal-Delete {
+        width: 33rem;
+        height: 23rem;
+        background-color: #fff;
+        border-radius: 50px;
+        display: flex;
+        flex-direction: column;
+        border: none;
+    }
+}

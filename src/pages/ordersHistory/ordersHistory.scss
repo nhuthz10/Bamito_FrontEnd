@@ -1,0 +1,61 @@
+.pageOrdersHitory {
+    height: 100vh;
+
+    .btn-order-status-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .btn_orderStatus {
+            background-color: #FEF3D7;
+            color: #777777;
+            height: 60px;
+            width: 160px;
+            border-radius: 11px;
+            margin: 0 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: var(--text-fontSize);
+        }
+
+        .btn_orderStatus:hover {
+            background-color: var(--second-color);
+            color: white;
+        }
+
+        .active {
+            background-color: var(--primary-color) !important;
+            color: white;
+        }
+
+    }
+
+    .orders {
+        font-size: var(--text-fontSize);
+        border-collapse: separate;
+        border-spacing: 0 5rem;
+
+        .order-row {
+            background-color: #F3F3F3;
+
+            .link {
+                color: blue;
+
+                &:hover {
+                    color: rgb(2, 2, 85);
+                }
+            }
+
+            td {
+                padding: 2rem;
+            }
+        }
+
+        .image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

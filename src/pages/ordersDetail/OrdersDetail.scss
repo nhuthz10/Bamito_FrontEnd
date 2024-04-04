@@ -1,0 +1,91 @@
+.orderdetail {
+  display: flex;
+  justify-content: space-around;
+  font-size: var(--text-fontSize);
+  margin-bottom: 5rem;
+
+  .information {
+  }
+}
+
+.products {
+  justify-content: center;
+
+  .productDetail {
+    border: 1px solid black;
+    display: flex;
+    padding: 2rem;
+    border-radius: 1rem;
+    min-height: 230px;
+
+    .thumbnail {
+      height: 150px;
+      width: 150px;
+    }
+
+    .info {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      font-size: var(--text-fontSize);
+
+      p {
+        margin: 1rem 0;
+      }
+    }
+  }
+}
+
+.pay-contact-container {
+  display: flex;
+  justify-content: flex-end;
+
+  .pay-contact {
+    width: 20%;
+
+    .pay_discount {
+      margin-top: 20px;
+      font-size: var(--text-fontSize);
+      display: flex;
+      flex-direction: column;
+
+      .txt_price {
+        color: #666666;
+      }
+
+      .txt_pay {
+        font-weight: bold;
+      }
+
+      .pay {
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem 0;
+
+        .price {
+          font-weight: bold;
+        }
+
+        .price_discount {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .btn_contact {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        padding: 10px 30px;
+        font-weight: bold;
+        border-radius: 11px;
+        background-color: #f95926;
+        color: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #ec3d25;
+  --second-color: #f46f25;
+  --white-color: white;
+  --gray-color: #cccbcb;
+  --gray-color-2: #efefef;
+  --primary-admin-color: #022e6c;
+  --second-admin-color: #2a528a;
+
+  --text-fontSize: 1.8rem;
+  --title-fontSize: 3.2rem;
+  --small-fontSize: 1.6rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
+  text-rendering: optimizeSpeed;
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
+
+a,
+Link {
+  text-decoration: none;
+  color: #000;
+  font-family: "Inter", sans-serif;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-family: "Inter", sans-serif;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+// custom scrollbar
+html ::-webkit-scrollbar {
+  border-radius: 0px;
+  width: 8px;
+}
+html *::-webkit-scrollbar {
+  border-radius: 0;
+  width: 8px;
+}
+html ::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--second-color);
+}
+html *::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--second-color);
+}
+html ::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0);
+}
+html *::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
+}

@@ -1,0 +1,14 @@
+.admin-layout-container {
+  min-height: 100vh;
+  .content {
+    display: flex;
+    padding-top: 7rem;
+
+    .children {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-left: 30rem;
+    }
+  }
+}

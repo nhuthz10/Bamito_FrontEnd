@@ -1,0 +1,21 @@
+.breadcrumbsWrapper {
+  position: absolute;
+  top: 10rem;
+  left: 10rem;
+  width: 100%;
+  z-index: 1;
+
+  font-size: var(--text-fontSize);
+  display: flex;
+
+  .text {
+    margin-right: 1rem;
+  }
+
+  span {
+    &:hover {
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+  }
+}
