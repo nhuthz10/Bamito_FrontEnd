@@ -782,7 +782,7 @@ function Cart() {
               >
                 {paymentValue === "PAYPAL" && isScript ? (
                   <PayPalButton
-                    amount={Math.round(pricePaypal / 24000)}
+                    amount={Math.round(pricePaypal / 25000)}
                     onSuccess={handlePaymentByPaypal}
                     onError={(data) => {
                       console.log(data);
