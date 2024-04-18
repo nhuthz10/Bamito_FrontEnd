@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import "./admin.scss";
+import "./OverView.scss";
 import Chart from "../../components/chart/Chart";
 import revenueImg from "../../assets/image 29.png";
 import orderImg from "../../assets/image 28.png";
@@ -21,7 +21,7 @@ const currencyFormatter = new Intl.NumberFormat("vi-VN", {
   maximumFractionDigits: 0,
 });
 
-function Admin() {
+function OverView() {
   const [revenueData, setRevenueData] = useState([]);
   const [allOrderStatus, setAllOrderStatus] = useState([]);
   const [totalIncome, setTotalIncome] = useState(0);
@@ -78,40 +78,40 @@ function Admin() {
         if (year === currentYear) {
           switch (month) {
             case 0:
-              newData[0] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 1:
-              newData[1] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 2:
-              newData[2] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 3:
-              newData[3] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 4:
-              newData[4] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 5:
-              newData[5] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 6:
-              newData[6] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 7:
-              newData[7] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 8:
-              newData[8] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 9:
-              newData[9] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 10:
-              newData[10] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             case 11:
-              newData[11] += item.totalPrice;
+              newData[month] += item.totalPrice;
               break;
             default:
               break;
@@ -186,4 +186,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default OverView;

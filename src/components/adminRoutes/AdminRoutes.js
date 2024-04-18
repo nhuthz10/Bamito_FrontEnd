@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Error from "../../pages/error/Error";
-import Admin from "../../adminPages/admin/Admin";
+import OverView from "../../adminPages/orverView/OverView";
 import { path } from "../../utils";
 import UserAdmin from "../../adminPages/userAdmin/userAdmin";
 import SizeAdmin from "../../adminPages/sizeAdmin/sizeAdmin";
@@ -25,7 +25,7 @@ import ReportAdmin from "../../adminPages/reportAdmin/ReportAdmin";
 function AdminRoutes() {
   return (
     <Routes>
-      <Route path={path.OVERVIEW_ADMIN} element={<Admin />} />
+      <Route path={path.OVERVIEW_ADMIN} element={<OverView />} />
       <Route path={path.PRODUCT_ADMIN} element={<ProductAdmin />} />
       <Route path={path.PRODUCT_TYPE_ADMIN} element={<ProductTypeAdmin />} />
       <Route path={path.PRODUCT_BRAND_ADMIN} element={<BrandAdmin />} />
