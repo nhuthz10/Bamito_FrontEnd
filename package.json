@@ -23,6 +23,7 @@
     "ajv-keywords": "^5.1.0",
     "axios": "^1.6.1",
     "dayjs": "^1.11.10",
+    "jwt-decode": "^4.0.0",
     "markdown-it": "^13.0.2",
     "node-sass": "^6.0.0",
     "normalize.css": "^8.0.1",

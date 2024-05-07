@@ -42,10 +42,7 @@ export const searchSlice = createSlice({
   },
 });
 
-export const {
-  fetchAllOrderSuccess,
-  fetchAllOrderFailed,
-  handleChangSearchText,
-} = searchSlice.actions;
+export const { fetchAllOrderSuccess, fetchAllOrderFailed } =
+  searchSlice.actions;
 
 export default searchSlice.reducer;

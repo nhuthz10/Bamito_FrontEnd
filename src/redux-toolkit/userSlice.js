@@ -20,6 +20,7 @@ export const userSlice = createSlice({
       state.userInfo = [];
       state.favourites = [];
       state.cartId = null;
+      localStorage.clear();
     },
     updateAvatar: (state, action) => {
       state.userInfo.avatar = action.payload;

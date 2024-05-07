@@ -11,14 +11,14 @@ import {
   handleLoginService,
   handleCreatCart,
 } from "../../services/userService";
+import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import { path } from "../../utils";
-
 import { faCheck, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
+import { handleGetUserAfterLoginService } from "../../services/userService";
 import image from "../../assets/loginImage.png";
 import logo from "../../assets/logo.png";
 import styles from "./Login.module.scss";
@@ -50,13 +50,29 @@ function Login() {
     try {
       let res = await handleLoginService(data.email, data.password);
       if (res && res.errCode === 0) {
-        dispatch(logIn(res?.user));
-        dispatch(updateFavourites(res?.user?.favourites));
-        let cartId = await handleCreatCart({ userId: res?.user?.id });
-        dispatch(updateCartId(cartId?.data));
-        toast.success("Đăng nhập thành công");
+        localStorage.setItem("access_token", res?.access_token);
+        localStorage.setItem("refresh_token", res?.refresh_token);
+
+        if (res?.access_token) {
+          const decoded = jwtDecode(res?.access_token);
+          if (decoded?.id) {
+            let useInfor = await handleGetUserAfterLoginService(
+              res?.access_token,
+              decoded?.id
+            );
+            if (useInfor?.errCode === 0) {
+              dispatch(logIn(useInfor?.user));
+              dispatch(updateFavourites(useInfor?.favourites));
+              let cartId = await handleCreatCart({
+                userId: useInfor?.user?.id,
+              });
+              dispatch(updateCartId(cartId?.data));
+              toast.success("Đăng nhập thành công");
+              navigate("/");
+            }
+          }
+        }
       }
-      navigate("/");
     } catch (err) {
       if (err?.response?.data?.errCode === 4) {
         toast.error("Email hoặc mật khẩu không chính xác");

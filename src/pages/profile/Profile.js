@@ -43,7 +43,8 @@ function Profile() {
   let getInforUser = async () => {
     dispatch(loadingProduct(true));
     try {
-      let res = await handleGetInforUserService(userId);
+      let access_token = localStorage.getItem("access_token");
+      let res = await handleGetInforUserService(userId, access_token);
       if (res && res.errCode === 0) {
         setName(res?.data?.userName);
         setValue("email", res?.data?.email);

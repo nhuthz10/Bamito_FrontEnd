@@ -42,10 +42,12 @@ export const fetchAllUserRedux = createAsyncThunk(
   "admin/fetchAllUserRedux",
   async (params, thunkAPI) => {
     try {
+      let access_token = localStorage.getItem("access_token");
       let res = await handleGetAllUserService(
         params?.limit,
         params?.page,
-        params?.name
+        params?.name,
+        access_token
       );
       if (res && res.errCode === 0) {
         thunkAPI.dispatch(fetchAllUserSuccess(res));
@@ -64,7 +66,8 @@ export const fetchAllRoleRedux = createAsyncThunk(
   "admin/fetchAllRoleRedux",
   async (params, thunkAPI) => {
     try {
-      let res = await handleGetAllRoleService();
+      let access_token = localStorage.getItem("access_token");
+      let res = await handleGetAllRoleService(access_token);
       if (res && res.errCode === 0) {
         thunkAPI.dispatch(fetchAllRoleSuccess(res?.data));
       } else {

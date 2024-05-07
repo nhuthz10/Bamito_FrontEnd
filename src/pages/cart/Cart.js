@@ -54,7 +54,8 @@ function Cart() {
 
   let getInforUser = async () => {
     try {
-      let res = await handleGetInforUserService(userId);
+      let access_token = localStorage.getItem("access_token");
+      let res = await handleGetInforUserService(userId, access_token);
       if (res && res.errCode === 0) {
         setUserInfo({
           name: res?.data?.userName,

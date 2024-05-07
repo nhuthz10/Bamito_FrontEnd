@@ -18,7 +18,8 @@ function UserAdmin() {
   const handleDeleteUser = async (user) => {
     try {
       dispatch(loadingAdmin(true));
-      let res = await handleDeleteService(user.id);
+      let access_token = localStorage.getItem("access_token");
+      let res = await handleDeleteService(user.id, access_token);
       if (res && res.errCode === 0) {
         await dispatch(fetchAllUserRedux({ limit: LIMIT, page: page }));
         await dispatch(fetchAllRoleRedux());

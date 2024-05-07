@@ -208,7 +208,7 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
       getAllDataProduct();
     } else if (type === "search-product") {
       let getAllDataSearch = async () => {
-        // dispatch(loadingProduct(true));
+        dispatch(loadingProduct(true));
         await dispatch(
           fetchAllProductSearchRedux({
             limit: LIMIT_SEARCH,
@@ -216,7 +216,7 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             name: searchText,
           })
         );
-        // dispatch(loadingProduct(false));
+        dispatch(loadingProduct(false));
         dispatch(handleResetPagination(false));
         dispatch(handleResetPagination(false));
       };
