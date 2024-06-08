@@ -10,7 +10,7 @@ import {
 
 import { toast } from "react-toastify";
 import logo from "../../assets/logo1.png";
-import styles from "./Header.module.scss";
+import "./Header.scss";
 import { logOut } from "../../redux-toolkit/userSlice";
 import avatarDefault from "../../assets/default-avatar.png";
 import { handleGetAllProductTypeService } from "../../services/productService";
@@ -52,7 +52,7 @@ const ProductTypesMenu = () => {
         return (
           <div
             key={index}
-            className={styles.productTypeWrapper}
+            className="product-type-wrapper"
             onClick={() => handleChangProductType(item.productTypeId)}
           >
             <p>{item.productTypeName}</p>
@@ -83,7 +83,7 @@ function Header() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className="header-container">
       <Link to="/">
         <img src={logo} alt="logo" />
       </Link>
@@ -100,35 +100,30 @@ function Header() {
         delay={[0, 500]}
         offset={[0, 3]}
         render={(attrs) => (
-          <div className={styles.dropdownMenu} tabIndex="-1" {...attrs}>
+          <div className="drop-down-menu" tabIndex="-1" {...attrs}>
             <ProductTypesMenu />
           </div>
         )}
       >
-        <div className={`${styles.dropdownProduct} `}>
-          <span
-            className={`${styles.text} ${isTippyOn ? styles.isTippyOn : null}`}
-          >
+        <div className="drop-down-product">
+          <span className={`text ${isTippyOn ? "is-tippy-on" : null}`}>
             SẢN PHẨM
           </span>
           <FontAwesomeIcon
-            className={`${styles.icon} ${isTippyOn ? styles.isTippyOn : null}`}
+            className={`icon ${isTippyOn ? "is-tippy-on" : null}`}
             icon={faChevronDown}
           />
         </div>
       </Tippy>
 
-      <div
-        onClick={handleClickSaleOff}
-        className={`${styles.text} ${styles.textHover}`}
-      >
+      <div onClick={handleClickSaleOff} className="btn-sale-off">
         SALE OFF
       </div>
 
       <Search></Search>
 
       {login ? (
-        <div className={styles.actions}>
+        <div className="header-actions">
           <Tippy
             interactive
             placement="bottom-end"
@@ -142,19 +137,19 @@ function Header() {
               />
             )}
           >
-            <button className={styles.actionBtn}>
+            <button className="header-action-btn">
               <img
                 src={avatarUser ? avatarUser : avatarDefault}
                 alt="avt"
-                className={styles.actionAvatar}
+                className="action-avatar"
                 style={{ border: "1px solid var(--primary-color)" }}
               />
             </button>
           </Tippy>
         </div>
       ) : (
-        <div className={styles.actions}>
-          <Link to="/login" className={styles.loginBtn}>
+        <div className="header-action-btn">
+          <Link to="/login" className="login-btn">
             <FontAwesomeIcon icon={faRightToBracket} />
             Đăng nhập
           </Link>

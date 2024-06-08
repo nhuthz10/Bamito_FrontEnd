@@ -7,9 +7,7 @@ import { toast } from "react-toastify";
 import { handleRegisterService } from "../../services/userService";
 import Loading from "../../components/Loading/Loading";
 import { useNavigate } from "react-router-dom";
-
-import styles from "../login/Login.module.scss";
-import styless from "./Register.module.scss";
+import "./Register.scss";
 import image from "../../assets/loginImage.png";
 import logo from "../../assets/logo.png";
 import { regex } from "../../utils";
@@ -42,10 +40,15 @@ const Input = ({
   }
 
   return (
-    <div className={styles.inputWrapper}>
-      <label className={styles.text}>{label}</label>
-      <div className={styles.input}>
-        <input className={styles.text} type={type} {...props} value={value} />
+    <div className="register-input-wrapper">
+      <label className="register-input-lable">{label}</label>
+      <div className="register-input">
+        <input
+          style={{ fontSize: "var(--text-fontSize)" }}
+          type={type}
+          {...props}
+          value={value}
+        />
       </div>
       {errors && <ErrorMessage errors={errors} name={name} as="p" />}
       {props.checkpassword === false && <p>{props.err}</p>}
@@ -122,20 +125,16 @@ function Register() {
 
   return (
     <Loading loading={isLoading}>
-      <div className={styles.page}>
-        <div className={styles.container}>
-          <div className={styles.loginForm}>
-            <Link to="/" className={styles.nameWrapper}>
+      <div className="register-container">
+        <div className="register-content">
+          <div className="register-content-left">
+            <Link to="/" className="logo-wrapper">
               <img src={logo} alt="logo"></img>
-              <h1 className={styles.name}>BAMITO</h1>
+              <h1 className="logo-name">BAMITO</h1>
             </Link>
 
-            <form
-              method="POST"
-              onSubmit={handleSubmit(onSubmit)}
-              className={styless.formSubmit}
-            >
-              <div className={styles.form}>
+            <form method="POST" onSubmit={handleSubmit(onSubmit)}>
+              <div className="register-form">
                 <Input
                   register={register}
                   errors={errors}
@@ -197,23 +196,17 @@ function Register() {
                 ></Input>
               </div>
               <div
-                className={styles.actions}
+                className="register-actions"
                 style={{ justifyContent: "flex-end" }}
               >
-                <Link
-                  to="/login"
-                  className={`${styles.text} ${styless.linkHadPass}`}
-                >
+                <Link to="/login" className="link-had-account">
                   Đã có tài khoản!
                 </Link>
               </div>
-              <div
-                className={styles.buttonWrapper1}
-                style={{ justifyContent: "center" }}
-              >
+              <div className="wrapper-button-register">
                 <button
                   type="submit"
-                  className={`${styles.button1} ${styles.text}`}
+                  className="button-register"
                   onClick={handleCheckPassword}
                 >
                   Đăng ký
@@ -221,7 +214,9 @@ function Register() {
               </div>
             </form>
           </div>
-          <img src={image} alt="img"></img>
+          <div className="register-content-right">
+            <img src={image} alt="img"></img>
+          </div>
         </div>
       </div>
     </Loading>

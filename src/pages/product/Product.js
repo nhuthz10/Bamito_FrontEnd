@@ -10,7 +10,7 @@ import Slider from "@mui/material/Slider";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 import { useDebounce } from "../../utils/commonUtils";
-import styles from "../product/product.module.scss";
+import "./Product.scss";
 import PaginatedItems from "../../components/Pagination/Pagination";
 import {
   handleFilterProduct,
@@ -130,16 +130,16 @@ const Product = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={styles.sideBar}>
-        <div className={styles.sideBar_element}>
-          <h1 className={styles.sideBar_element_title}>Thương hiệu</h1>
-          <div className={styles.sideBar_line}></div>
+    <div className="product-page">
+      <div className="product-sidebar">
+        <div className="sidebar-item">
+          <h1 className="sidebar-item-title">Thương hiệu</h1>
+          <div className="sidebar-line"></div>
           {brands &&
             brands.length > 0 &&
             brands.map((item, index) => {
               return (
-                <div className={styles.sideBar_element_content} key={index}>
+                <div className="sidebar-content" key={index}>
                   <p>{item.brandName}</p>
                   <input
                     type="checkbox"
@@ -150,9 +150,9 @@ const Product = () => {
               );
             })}
         </div>
-        <div className={styles.sideBar_element}>
-          <h1 className={styles.sideBar_element_title}>Mức giá</h1>
-          <div className={styles.sideBar_line}></div>
+        <div className="sidebar-item">
+          <h1 className="sidebar-item-title">Mức giá</h1>
+          <div className="sidebar-line"></div>
           <Slider
             getAriaLabel={() => "Default"}
             valueLabelDisplay="off"
@@ -161,19 +161,19 @@ const Product = () => {
             onChange={handleChangePrice}
             min={0}
             max={10000000}
-            className={styles.priceSlider}
+            className="price-slider"
             style={{ color: "var(--second-color)" }}
           />
-          <div className={styles.priceSliderValue}>
+          <div className="price-slider-value">
             <span>{currencyFormatter.format(priceValue[0])}</span>
             <span>{currencyFormatter.format(priceValue[1])}</span>
           </div>
         </div>
       </div>
-      <div className={styles.content}>
-        <div className={styles.sortWrapper}>
-          <div className={styles.sortElement}>
-            <div className={styles.SortTitle}>
+      <div className="product-content">
+        <div className="sort-container">
+          <div className="sort-content">
+            <div className="sort-title">
               <FontAwesomeIcon icon={faArrowDownWideShort} />
               <span>Sắp xếp: </span>
             </div>
@@ -183,7 +183,7 @@ const Product = () => {
               delay={[0, 300]}
               offset={[0, 4]}
               render={(attrs) => (
-                <div className={styles.dropdownSort} tabIndex="-1" {...attrs}>
+                <div className="dropdown-sort" tabIndex="-1" {...attrs}>
                   {sortBy.map((item, index) => {
                     if (item.value !== sortValue.value) {
                       return (
@@ -201,16 +201,16 @@ const Product = () => {
                 </div>
               )}
             >
-              <div className={styles.sortValue}>
+              <div className="sort-value">
                 <p>{sortValue.value}</p>
-                <div className={styles.sortUnderline}></div>
+                <div className="sort-underline"></div>
               </div>
             </Tippy>
           </div>
         </div>
-        <div className={styles.mainContent}>
+        <div className="list-product">
           {paginationData?.length === 0 && !isLoading ? (
-            <div className={styles.noProduct}>
+            <div className="no-product">
               <h1>Không có sản phẩm nào</h1>
               <img src={noProduct} alt=":((" />
             </div>
@@ -221,11 +221,11 @@ const Product = () => {
                   <Grid item xs={4} key={index}>
                     <Link
                       to={`/product/${item.productTypeData.productTypeId}/${item.productId}`}
-                      className={styles.productWrapper}
+                      className="product-item"
                     >
                       <img
                         src={item.image}
-                        className={styles.productImg}
+                        className="product-img"
                         style={{
                           objectFit:
                             item.productTypeData?.productTypeName ===
@@ -236,7 +236,7 @@ const Product = () => {
                         alt="product"
                       ></img>
                       <button
-                        className={styles.favorite}
+                        className="favorite-btn"
                         onClick={(e) => {
                           e.preventDefault();
                         }}
@@ -246,21 +246,21 @@ const Product = () => {
                             onClick={() => {
                               handleClickLike(item.productId, "like");
                             }}
-                            className={styles.icon}
+                            className="favourite-icon"
                             style={{ color: "red" }}
                           />
                         ) : (
                           <FavoriteBorderTwoToneIcon
-                            className={styles.icon}
+                            className="favourite-icon"
                             onClick={() => {
                               handleClickLike(item.productId, "noLike");
                             }}
                           />
                         )}
                       </button>
-                      <div className={styles.productInfo}>
-                        <p className={styles.productName}>{item.name}</p>
-                        <div className={styles.productRating}>
+                      <div className="product-infor">
+                        <p className="product-name">{item.name}</p>
+                        <div className="product-rating">
                           <Rating
                             defaultValue={0}
                             value={item.rating}
@@ -272,7 +272,7 @@ const Product = () => {
                             {item.rating}/<span>5</span>
                           </p>
                         </div>
-                        <div className={styles.productPrice}>
+                        <div className="product-price">
                           <p
                             style={{
                               color:
@@ -318,8 +318,8 @@ const Product = () => {
             </Grid>
           )}
         </div>
-        <div className={styles.lineWrapper}>
-          <div className={styles.line}></div>
+        <div className="line-wrapper">
+          <span className="line"></span>
         </div>
         <div style={{ marginTop: 50 }}>
           <PaginatedItems type={"user-product"} productTypeId={productTypeId} />

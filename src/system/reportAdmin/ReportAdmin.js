@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,7 +12,7 @@ import "../admin.scss";
 import GridData from "../../components/gridData";
 import { LIMIT } from "../../utils";
 
-function ProductAdmin() {
+function ReportAdmin() {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.pagination.page);
 
@@ -35,7 +35,7 @@ function ProductAdmin() {
         toast.success("Xóa sản phẩm thành công");
       }
     } catch (err) {
-      if (err.response.data.errCode === 2) {
+      if (err?.response?.data?.errCode === 2) {
         toast.error("Sản phẩm không tồn tại");
       } else {
         toast.error(err?.response?.data?.message);
@@ -51,22 +51,23 @@ function ProductAdmin() {
       key: "",
       style: { borderTopLeftRadius: 15, paddingLeft: "2rem" },
     },
-    { label: "MÃ SẢN PHẨM", key: "productId" },
-    { label: "TÊN SẢN PHẨM", key: "name" },
-    { label: "LOẠI SẢN PHẨM", key: "productTypeData" },
-    { label: "ĐƠN GIÁ", key: "price" },
+    { label: "TÊN SẢN PHẨM", key: "name", style: { width: 350 } },
+    { label: "KÍCH CỠ", key: "sizeName" },
+    { label: "GIÁ", key: "price" },
     { label: "GIẢM GIÁ", key: "discount" },
-    { label: "", key: "", style: { borderTopRightRadius: 15 } },
+    { label: "SỐ LƯỢNG", key: "quantity" },
+    { label: "TỔNG TIỀN", key: "totalPrice" },
+    { label: "NGÀY MUA", key: "time", style: { borderTopRightRadius: 15 } },
   ];
 
   return (
     <GridData
       tableColumns={tableColumns}
       handleDelete={handleDeleteProduct}
-      headerString="Quản lý sản phẩm"
-      gridType="product"
+      headerString="Báo cáo doanh thu"
+      gridType="report-admin"
     />
   );
 }
 
-export default ProductAdmin;
+export default ReportAdmin;

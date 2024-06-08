@@ -1,0 +1,240 @@
+.cart-page {
+  h1 {
+    font-size: 2.7rem;
+  }
+  .cart-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3rem;
+    min-height: 110rem;
+
+    .cart-list-product {
+      width: 50%;
+      border: 0.1rem solid var(--gray-color);
+      border-radius: 2rem;
+      padding: 5rem;
+
+      .product-item {
+        display: flex;
+        justify-content: space-between;
+
+        .product-infor {
+          display: flex;
+          flex: 1;
+          align-items: center;
+
+          .product-img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            margin-right: 20px;
+            border-radius: 20px;
+          }
+
+          .wrap-name-price-product {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            line-height: 1.4;
+
+            .product-name {
+              font-size: var(--text-fontSize);
+            }
+
+            .product-price {
+              display: flex;
+              font-size: var(--text-fontSize);
+              margin: 10px 0;
+            }
+            .total-price {
+              margin-top: auto;
+              font-size: var(--text-fontSize);
+              color: red;
+            }
+          }
+        }
+        .product-action {
+          display: flex;
+          width: 200px;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: flex-end;
+
+          .delete-btn {
+            color: red;
+
+            .delete-icon {
+              font-size: 3.5rem;
+
+              &:hover {
+                transform: scale(1.1);
+              }
+            }
+          }
+
+          .quantity-btn {
+            width: 12.7rem;
+            height: 4.6rem;
+            background-color: #f0f0f0;
+            border-radius: 6.2rem;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            p {
+              font-size: var(--text-fontSize);
+              width: 100%;
+              text-align: center;
+            }
+
+            button {
+              height: 100%;
+              width: 100%;
+            }
+
+            .subtract-btn {
+              .subtract-icon {
+                font-size: 2rem;
+              }
+              &:hover {
+                background-color: #dfdfdf;
+                border-top-left-radius: 100%;
+                border-bottom-left-radius: 100%;
+              }
+            }
+
+            .add-btn {
+              .add-icon {
+                font-size: 2rem;
+              }
+              &:hover {
+                background-color: #dfdfdf;
+                border-top-right-radius: 100%;
+                border-bottom-right-radius: 100%;
+              }
+            }
+          }
+        }
+      }
+      .line {
+        width: 100%;
+        border: 0.01rem solid var(--gray-color);
+        margin: 2rem 0;
+      }
+    }
+    .cart-order {
+      width: 40%;
+      height: 100%;
+      border: 0.1rem solid var(--gray-color);
+      border-radius: 2rem;
+      padding: 5rem 7rem;
+
+      .order-detail {
+        .order-infor {
+          margin-top: 1rem;
+          display: flex;
+          justify-content: space-between;
+          font-size: 2rem;
+          align-items: center;
+          height: 6.6rem;
+
+          .order-label {
+            flex: 1;
+            font-weight: 600;
+          }
+
+          .order-input {
+            flex: 2;
+            caret-color: var(--primary-color);
+            height: 100%;
+          }
+        }
+
+        .radio-group {
+          .radio {
+            margin-top: 2rem;
+          }
+
+          .radio-label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            p {
+              margin-right: 5rem;
+            }
+          }
+
+          span {
+            font-size: 2rem;
+            font-weight: 600;
+            font-family: "Inter", sans-serif;
+          }
+        }
+      }
+
+      .voucher-wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        .voucher-name {
+          width: 65%;
+          height: 5rem;
+          background-color: #f0f0f0;
+          border-radius: 6rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: rgba(0, 0, 0, 0.6);
+
+          .voucher-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+          }
+
+          p {
+            font-size: var(--small-fontSize);
+          }
+        }
+
+        .voucher-btn {
+          width: 25%;
+          height: 5rem;
+          background-color: var(--primary-color);
+          border-radius: 6rem;
+
+          color: white;
+          font-size: var(--small-fontSize);
+          font-weight: 600;
+        }
+      }
+
+      .order-btn {
+        width: 100%;
+        height: 6rem;
+        border-radius: 6rem;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: var(--primary-color);
+        color: white;
+        font-size: 2.4rem;
+        font-weight: 600;
+
+        .order-icon {
+          font-size: 3rem;
+          margin-right: 1rem;
+        }
+      }
+
+      .line {
+        width: 100%;
+        border: 0.01rem solid var(--gray-color);
+        margin: 2rem 0;
+      }
+    }
+  }
+}

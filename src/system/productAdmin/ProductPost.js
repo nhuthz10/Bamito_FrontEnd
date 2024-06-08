@@ -84,6 +84,7 @@ function ProductPost() {
         setDesHTML(data.descriptionHTML);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, setValue]);
 
   const onSubmit = async (submitData) => {

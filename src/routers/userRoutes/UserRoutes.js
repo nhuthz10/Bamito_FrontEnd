@@ -9,7 +9,7 @@ import OrdersDetail from "../../pages/ordersDetail/OrdersDetail";
 import Error from "../../pages/error/Error";
 import Layout from "../../layout/Layout/Layout";
 import OrdersHistory from "../../pages/ordersHistory/OrdersHistory";
-import { path } from "../../utils/";
+import { path } from "../../utils";
 import { useEffect } from "react";
 
 var userPages = [

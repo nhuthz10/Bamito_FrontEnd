@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { handleGetAllVoucherUserService } from "../../services/productService";
-import styles from "./voucher.module.scss";
+import "./Voucher.scss";
 import { toast } from "react-toastify";
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
@@ -46,20 +46,20 @@ function Voucher({ setVoucherSelect, setVoucherPrice, setVoucherId }) {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.title}>
+    <div className="voucher-container">
+      <div className="voucher-title">
         <button onClick={() => setVoucherSelect(false)}>
-          <ArrowBackIosIcon className={styles.backIcon} />
+          <ArrowBackIosIcon className="back-icon" />
         </button>
         <h2>Voucher của bạn</h2>
       </div>
-      <div className={styles.vouchers}>
+      <div className="voucher-content">
         {allVoucher &&
           allVoucher?.length > 0 &&
           allVoucher.map((item, index) => {
             return (
               <button
-                className={styles.voucher}
+                className="voucher"
                 key={index}
                 onClick={() => {
                   setVoucherPrice(item.voucherPrice);
@@ -67,8 +67,8 @@ function Voucher({ setVoucherSelect, setVoucherPrice, setVoucherId }) {
                   setVoucherSelect(false);
                 }}
               >
-                <img src={item.image} alt="v" className={styles.image}></img>
-                <div className={styles.voucherInfo}>
+                <img src={item.image} alt="v" className="voucher-image"></img>
+                <div className="voucher-info">
                   <p>
                     {currencyFormatter.format(item.voucherPrice)}
                     <span

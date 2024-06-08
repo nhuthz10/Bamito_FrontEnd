@@ -2,25 +2,25 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Error from "../../pages/error/Error";
-import OverView from "../../adminPages/orverView/OverView";
+import OverView from "../../system/orverView/OverView";
 import { path } from "../../utils";
-import UserAdmin from "../../adminPages/userAdmin/userAdmin";
-import SizeAdmin from "../../adminPages/sizeAdmin/sizeAdmin";
-import ProductTypeAdmin from "../../adminPages/productTypeAdmin/productTypeAdmin";
-import BrandAdmin from "../../adminPages/brandAdmin/brandAdmin";
-import ProductAdmin from "../../adminPages/productAdmin/productAdmin";
-import UserPost from "../../adminPages/userAdmin/UserPost";
-import ProductTypePost from "../../adminPages/productTypeAdmin/ProductTypePost";
-import SizePost from "../../adminPages/sizeAdmin/SizePost";
-import BrandPost from "../../adminPages/brandAdmin/brandPost";
-import ProductPost from "../../adminPages/productAdmin/ProductPost";
-import ProductSizeAdmin from "../../adminPages/productAdmin/productSizeAdmin";
-import ProductSizePost from "../../adminPages/productAdmin/ProductSizePost";
-import VoucherAdmin from "../../adminPages/voucherAdmin/VoucherAdmin";
-import VoucherPost from "../../adminPages/voucherAdmin/VoucherPost";
-import OrderAdmin from "../../adminPages/orderAdmin/orderAdmin";
-import OrderPost from "../../adminPages/orderAdmin/orderPost";
-import ReportAdmin from "../../adminPages/reportAdmin/ReportAdmin";
+import UserAdmin from "../../system/userAdmin/userAdmin";
+import SizeAdmin from "../../system/sizeAdmin/sizeAdmin";
+import ProductTypeAdmin from "../../system/productTypeAdmin/productTypeAdmin";
+import BrandAdmin from "../../system/brandAdmin/brandAdmin";
+import ProductAdmin from "../../system/productAdmin/productAdmin";
+import UserPost from "../../system/userAdmin/UserPost";
+import ProductTypePost from "../../system/productTypeAdmin/ProductTypePost";
+import SizePost from "../../system/sizeAdmin/SizePost";
+import BrandPost from "../../system/brandAdmin/brandPost";
+import ProductPost from "../../system/productAdmin/ProductPost";
+import ProductSizeAdmin from "../../system/productAdmin/productSizeAdmin";
+import ProductSizePost from "../../system/productAdmin/ProductSizePost";
+import VoucherAdmin from "../../system/voucherAdmin/VoucherAdmin";
+import VoucherPost from "../../system/voucherAdmin/VoucherPost";
+import OrderAdmin from "../../system/orderAdmin/orderAdmin";
+import OrderPost from "../../system/orderAdmin/orderPost";
+import ReportAdmin from "../../system/reportAdmin/ReportAdmin";
 
 function AdminRoutes() {
   return (

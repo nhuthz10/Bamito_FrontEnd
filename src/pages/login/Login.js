@@ -21,7 +21,7 @@ import { faCheck, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { handleGetUserAfterLoginService } from "../../services/userService";
 import image from "../../assets/loginImage.png";
 import logo from "../../assets/logo.png";
-import styles from "./Login.module.scss";
+import "./Login.scss";
 import { regex } from "../../utils";
 
 function Login() {
@@ -90,26 +90,30 @@ function Login() {
 
   return (
     <Loading loading={isLoading}>
-      <div className={styles.page}>
-        <div className={styles.container}>
-          <img className={styles.imgLogin} src={image} alt="img" />
-          <div className={styles.loginForm}>
-            <Link to="/" className={styles.nameWrapper}>
-              <img src={logo} alt="logo"></img>
-              <h1 className={styles.name}>BAMITO</h1>
+      <div className="login-container">
+        <div className="login-content">
+          <div className="login-content-left">
+            <img src={image} alt="img" />
+          </div>
+          <div className="login-content-right">
+            <Link to="/" className="logo-wrapper">
+              <img src={logo} alt="logo-img"></img>
+              <h1 className="logo-name">BAMITO</h1>
             </Link>
-            <h1 style={{ marginTop: "3rem" }}>XIN CHÀO BẠN 👋</h1>
+            <h1 style={{ marginTop: "3rem", marginBottom: "2px" }}>
+              XIN CHÀO BẠN 👋
+            </h1>
             <p style={{ fontSize: "1.6rem" }}>
               Nhập email và mật khẩu của bạn để trải nghiệm Bamito nhé
             </p>
 
             <form onSubmit={handleSubmit(onSubmit)} method="POST">
-              <div className={styles.form}>
-                <div className={styles.inputWrapper}>
-                  <label className={styles.text}>Email</label>
-                  <div className={`${styles.input}`}>
+              <div className="login-form">
+                <div className="form-input-wrapper">
+                  <label className="form-lable">Email</label>
+                  <div className="form-input">
                     <input
-                      className={styles.text}
+                      style={{ fontSize: "var(--text-fontSize)" }}
                       type="text"
                       autoComplete="username"
                       {...register("email", {
@@ -123,11 +127,11 @@ function Login() {
                   </div>
                   {errors.email && <p>{errors.email.message}</p>}
                 </div>
-                <div className={styles.inputWrapper}>
-                  <label className={styles.text}>Mật khẩu</label>
-                  <div className={`${styles.input}`}>
+                <div className="form-input-wrapper">
+                  <label className="form-lable">Mật khẩu</label>
+                  <div className="form-input">
                     <input
-                      className={styles.text}
+                      style={{ fontSize: "var(--text-fontSize)" }}
                       type={showPassword ? "text" : "password"}
                       autoComplete="current-password"
                       {...register("password", {
@@ -140,7 +144,7 @@ function Login() {
                     />
                     <button
                       type="button"
-                      className={styles.text}
+                      style={{ fontSize: "var(--text-fontSize)" }}
                       onClick={handleShowPassword}
                     >
                       <FontAwesomeIcon
@@ -153,13 +157,13 @@ function Login() {
                 </div>
               </div>
 
-              <div className={styles.actions}>
+              <div className="login-actions">
                 <button
                   type="button"
-                  className={`${styles.text} ${styles.checkSaveBtnWrapper}`}
+                  className="check-save-btn-wrapper"
                   onClick={handleCheck}
                 >
-                  <div className={styles.checkSaveBtn}>
+                  <div className="check-save-btn">
                     {check && <FontAwesomeIcon icon={faCheck} />}
                   </div>
                   <span>Lưu đăng nhập</span>
@@ -167,41 +171,34 @@ function Login() {
                 <Link
                   to={path.FORGOT_PASSWORD}
                   type="button"
-                  className={`${styles.text} ${styles.forgotPasswordBtn}`}
+                  className="forgot-password-btn"
                 >
                   Quên mật khẩu?
                 </Link>
               </div>
 
-              <div className={styles.buttonWrapper1}>
-                <button
-                  type="submit"
-                  className={`${styles.text} ${styles.button1}`}
-                >
+              <div className="login-auth-buttons">
+                <button type="submit" className="login-button">
                   Đăng nhập
                 </button>
-                <Link
-                  to="/register"
-                  className={`${styles.text} ${styles.button1}`}
-                >
+                <Link to="/register" className="register-button">
                   Đăng ký
                 </Link>
               </div>
             </form>
 
             <p
-              className={`${styles.text}`}
-              style={{ marginTop: "5rem", textAlign: "center" }}
+              style={{
+                marginTop: "5rem",
+                textAlign: "center",
+                fontSize: "var(--text-fontSize)",
+              }}
             >
               Hoặc đăng nhập với
             </p>
-            <div className={styles.buttonWrapper2}>
-              <button className={`${styles.text} ${styles.button2}`}>
-                Facebook
-              </button>
-              <button className={`${styles.text} ${styles.button2}`}>
-                Google
-              </button>
+            <div className="login-auth-social-buttons">
+              <button className="login-button-facebook">Facebook</button>
+              <button className="login-button-google">Google</button>
             </div>
           </div>
         </div>

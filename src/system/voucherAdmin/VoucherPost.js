@@ -60,6 +60,7 @@ function VoucherPost() {
       setValue("quantity", data.quantity);
       setImageValue(data.image);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, setValue]);
 
   const handleChangeImage = async (e) => {

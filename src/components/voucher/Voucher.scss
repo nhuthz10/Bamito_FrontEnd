@@ -1,0 +1,63 @@
+.voucher-container {
+  .voucher-title {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      font-size: 2.4rem;
+    }
+
+    button {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 100%;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+
+      .back-icon {
+        font-size: 2.4rem;
+      }
+    }
+  }
+
+  .voucher-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+
+    .voucher {
+      display: flex;
+      align-items: center;
+      width: 90%;
+      background-color: #f0f0f0;
+      margin-top: 2rem;
+      padding: 3rem;
+      border-radius: 2rem;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .voucher-info {
+        text-align: left;
+        font-size: var(--text-fontSize);
+      }
+
+      .voucher-image {
+        height: 120px;
+        width: 120px;
+        border-radius: 20px;
+        margin-right: 16px;
+      }
+    }
+  }
+}

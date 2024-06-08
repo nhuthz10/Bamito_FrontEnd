@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
 import PaginatedItems from "../../components/Pagination/Pagination";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
@@ -90,7 +89,7 @@ function Favourite() {
   };
 
   return (
-    <div className="sale-off-container">
+    <div className="favourite-container">
       <Grid container spacing={5}>
         {paginationData && paginationData?.length > 0 ? (
           paginationData?.map((item, index) => {

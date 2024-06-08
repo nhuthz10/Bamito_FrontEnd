@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { handleDeleteSizeService } from "../../services/productService";
 import { useDispatch, useSelector } from "react-redux";
 import {

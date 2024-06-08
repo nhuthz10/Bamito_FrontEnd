@@ -30,7 +30,7 @@ import {
   handleChangePage,
   handleResetPagination,
 } from "../../redux-toolkit/paginationSlice";
-import styles from "./Pagination.module.scss";
+import "./Pagination.scss";
 
 function PaginatedItems({ type, productTypeId, orderStatus }) {
   const dispatch = useDispatch();
@@ -405,14 +405,14 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             </button>
           }
           containerClassName={
-            !isLoading ? styles.pagination : styles.hidePagination
+            !isLoading ? "pagination-container" : "hide-pagination"
           }
-          pageLinkClassName={styles.number_a}
-          previousClassName={styles.button}
-          nextClassName={styles.button}
-          activeClassName={styles.active}
+          pageLinkClassName="number_a"
+          previousClassName="button"
+          nextClassName="button"
+          activeClassName="active"
           breakLabel="..."
-          breakClassName={styles.break}
+          breakClassName="break"
           renderOnZeroPageCount={null}
         />
       )}

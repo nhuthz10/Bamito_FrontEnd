@@ -1,0 +1,131 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--gray-color);
+
+  .register-content {
+    width: 1300px;
+    height: 760px;
+    border-radius: 5rem;
+    display: flex;
+    background-color: #fff;
+
+    h1,
+    p,
+    span,
+    input {
+      color: #3e334e;
+    }
+
+    .register-content-left {
+      width: 100%;
+      padding: 0 10rem;
+
+      h1 {
+        font-size: var(--title-fontSize);
+      }
+
+      p {
+        font-size: var(--text-fontSize);
+      }
+
+      input {
+        caret-color: var(--primary-color);
+      }
+
+      .logo-wrapper {
+        display: flex;
+        align-items: center;
+        margin-top: 3rem;
+        width: 20rem;
+
+        .logo-name {
+          margin-left: 2rem;
+        }
+      }
+
+      .register-form {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .register-input-wrapper {
+          height: 13rem;
+
+          p {
+            color: #bf1650;
+          }
+
+          p::before {
+            display: inline;
+            content: "⚠ ";
+          }
+
+          .register-input-lable {
+            font-size: var(--text-fontSize);
+          }
+          .register-input {
+            height: 5.5rem;
+            border-radius: 1rem;
+            padding: 0 1rem;
+            font-size: var(--text-fontSize);
+            margin: 1rem 0;
+            display: flex;
+            border: 1px solid #afa2c3;
+
+            &:focus-within {
+              border-color: var(--second-color);
+            }
+
+            input {
+              border: none;
+              flex: 1;
+            }
+          }
+        }
+      }
+
+      .register-actions {
+        display: flex;
+        justify-content: space-between;
+
+        .link-had-account {
+          font-size: var(--text-fontSize);
+          color: #3e334e;
+
+          &:hover {
+            text-decoration: underline;
+            text-decoration-color: #3e334e;
+          }
+        }
+      }
+
+      .wrapper-button-register {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+
+        .button-register {
+          width: 20rem;
+          height: 5rem;
+          font-size: var(--text-fontSize);
+          background: linear-gradient(
+            to right,
+            var(--second-color),
+            var(--primary-color)
+          );
+          border-radius: 1rem;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+    .register-content-right {
+    }
+  }
+}

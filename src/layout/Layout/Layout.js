@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 
-import styles from "./Layout.module.scss";
+import "./Layout.scss";
 import Loading from "../../components/Loading/Loading";
 import { useSelector } from "react-redux";
 const Layout = ({ children }) => {
@@ -15,10 +15,10 @@ const Layout = ({ children }) => {
 
   return (
     <Loading loading={loading}>
-      <div className={styles.wrapper}>
+      <div className="layout-container">
         <Header />
         {!isHome ? <Breadcrumb /> : null}
-        <div className={styles.children}>{children}</div>
+        <div className="layout-content">{children}</div>
         <Footer />
       </div>
     </Loading>

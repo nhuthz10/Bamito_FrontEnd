@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 import "../admin.scss";
 import { handleDeleteVoucher } from "../../services/productService";

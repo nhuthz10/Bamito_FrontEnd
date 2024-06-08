@@ -22,7 +22,7 @@ import {
 import { handleGetInforUserService } from "../../services/userService";
 import { handleGetPaypalClientId } from "../../services/productService";
 import { useSelector } from "react-redux";
-import styles from "./Cart.module.scss";
+import "./Cart.scss";
 import Voucher from "../../components/voucher/Voucher";
 import { useDebounce } from "../../utils/commonUtils";
 import { toast } from "react-toastify";
@@ -355,27 +355,27 @@ function Cart() {
   };
 
   return (
-    <div className={styles.page}>
+    <div className="cart-page">
       <h1>Giỏ hàng của bạn</h1>
-      <div className={styles.container}>
-        <div className={styles.product}>
+      <div className="cart-container">
+        <div className="cart-list-product">
           {allProduct &&
             allProduct?.length > 0 &&
             allProduct?.map((product, index) => {
               return (
                 <div key={index}>
-                  <div className={styles.eachProduct}>
-                    <div className={styles.inforProduct}>
+                  <div className="product-item">
+                    <div className="product-infor">
                       <img
                         src={product.image}
                         alt="product"
-                        className={styles.imgProduct}
+                        className="product-img"
                       />
-                      <div className={styles.namePriceProduct}>
-                        <div className={styles.nameProduct}>
+                      <div className="wrap-name-price-product">
+                        <div className="product-name">
                           <p>{product.name}</p>
                         </div>
-                        <div className={styles.priceProduct}>
+                        <div className="product-price">
                           <p
                             style={{
                               color:
@@ -417,7 +417,7 @@ function Cart() {
                         <div style={{ fontSize: "var(--text-fontSize)" }}>
                           Kích cỡ: {product.sizeName}
                         </div>
-                        <div className={styles.totalPrice}>
+                        <div className="total-price">
                           <p>
                             {currencyFormatter.format(product.totalPrice)}
                             <span
@@ -433,50 +433,48 @@ function Cart() {
                       </div>
                     </div>
 
-                    <div className={styles.actionProduct}>
+                    <div className="product-action">
                       <button
-                        className={styles.deleteBtn}
+                        className="delete-btn"
                         onClick={() => handleDeleteProductCart(product)}
                       >
-                        <DeleteForeverTwoToneIcon
-                          className={styles.deleteIcon}
-                        />
+                        <DeleteForeverTwoToneIcon className="delete-icon" />
                       </button>
-                      <div className={styles.quantityBtn}>
+                      <div className="quantity-btn">
                         <button
-                          className={styles.subtractBtn}
+                          className="subtract-btn"
                           onClick={() => handleDecrement(product)}
                         >
-                          <RemoveIcon className={styles.quantityIcon} />
+                          <RemoveIcon className="subtract-icon" />
                         </button>
                         <p>{product.quantity}</p>
                         <button
-                          className={styles.addBtn}
+                          className="add-btn"
                           onClick={() => handleIncrement(product)}
                         >
-                          <AddTwoToneIcon className={styles.quantityIcon} />
+                          <AddTwoToneIcon className="add-icon" />
                         </button>
                       </div>
                     </div>
                   </div>
                   {allProduct?.length - 1 !== index ? (
-                    <div className={styles.line}></div>
+                    <div className="line"></div>
                   ) : null}
                 </div>
               );
             })}
         </div>
-        <div className={styles.order}>
+        <div className="cart-order">
           {!voucherSelect ? (
             <>
-              <div className={styles.orderElementWrapper}>
+              <div className="order-detail">
                 <h1>Thông tin người nhận</h1>
-                <div className={styles.orderElement}>
-                  <label htmlFor="name" className={styles.label}>
+                <div className="order-infor">
+                  <label htmlFor="name" className="order-label">
                     Họ tên
                   </label>
                   <TextField
-                    className={styles.input}
+                    className="order-input"
                     variant="standard"
                     error={userInfo?.name?.length === 0 ? true : false}
                     inputProps={{
@@ -497,12 +495,12 @@ function Cart() {
                     onChange={handleChangeName}
                   />
                 </div>
-                <div className={styles.orderElement}>
-                  <label htmlFor="phone" className={styles.label}>
+                <div className="order-infor">
+                  <label htmlFor="phone" className="order-label">
                     Số điện thoại
                   </label>
                   <TextField
-                    className={styles.input}
+                    className="order-input"
                     variant="standard"
                     error={
                       userInfo?.phone?.length === 0 || !userInfo?.phone
@@ -527,12 +525,12 @@ function Cart() {
                     onChange={handleChangePhone}
                   />
                 </div>
-                <div className={styles.orderElement}>
-                  <label htmlFor="address" className={styles.label}>
+                <div className="order-infor">
+                  <label htmlFor="address" className="order-label">
                     Địa chỉ
                   </label>
                   <TextField
-                    className={styles.input}
+                    className="order-input"
                     variant="standard"
                     error={
                       userInfo?.address?.length === 0 || !userInfo?.address
@@ -557,12 +555,12 @@ function Cart() {
                     onChange={handleChangeAddress}
                   />
                 </div>
-                <div className={styles.orderElement}>
-                  <label htmlFor="email" className={styles.label}>
+                <div className="order-infor">
+                  <label htmlFor="email" className="order-label">
                     Email
                   </label>
                   <TextField
-                    className={styles.input}
+                    className="order-input"
                     variant="standard"
                     error={userInfo?.email?.length === 0 ? true : false}
                     inputProps={{
@@ -585,14 +583,14 @@ function Cart() {
                 </div>
               </div>
 
-              <div className={styles.line}></div>
+              <div className="line"></div>
 
-              <div className={styles.orderElementWrapper}>
+              <div className="order-detail">
                 <h1>Thông tin đơn hàng</h1>
-                <div className={styles.orderElement}>
-                  <label className={styles.label}>Tổng cộng</label>
+                <div className="order-infor">
+                  <label className="order-label">Tổng cộng</label>
                   <TextField
-                    className={styles.input}
+                    className="order-input"
                     variant="standard"
                     value={
                       currentTotalPrice
@@ -607,10 +605,10 @@ function Cart() {
                     }}
                   />
                 </div>
-                <div className={styles.orderElement}>
-                  <label className={styles.label}>Giảm giá</label>
+                <div className="order-infor">
+                  <label className="order-label">Giảm giá</label>
                   <TextField
-                    className={styles.input}
+                    className="order-input"
                     variant="standard"
                     value={`- ${currencyFormatter.format(voucherPrice)}`}
                     inputProps={{
@@ -625,10 +623,10 @@ function Cart() {
                     }}
                   />
                 </div>
-                <div className={styles.orderElement}>
-                  <label className={styles.label}>Phí vận chuyển</label>
+                <div className="order-infor">
+                  <label className="order-label">Phí vận chuyển</label>
                   <TextField
-                    className={styles.input}
+                    className="order-input"
                     variant="standard"
                     value={currencyFormatter.format(30000)}
                     inputProps={{
@@ -639,10 +637,10 @@ function Cart() {
                     }}
                   />
                 </div>
-                <div className={styles.orderElement}>
-                  <label className={styles.label}>Phải trả</label>
+                <div className="order-infor">
+                  <label className="order-label">Phải trả</label>
                   <TextField
-                    className={styles.input}
+                    className="order-input"
                     variant="standard"
                     value={
                       pricePaypal ? currencyFormatter.format(pricePaypal) : 0
@@ -657,14 +655,14 @@ function Cart() {
                 </div>
               </div>
 
-              <div className={styles.line}></div>
+              <div className="line"></div>
 
-              <div className={styles.orderElementWrapper}>
+              <div className="order-detail">
                 <h1>Phương thức thanh toán</h1>
                 <RadioGroup
                   aria-labelledby="demo-controlled-radio-buttons-group"
                   name="controlled-radio-buttons-group"
-                  className={styles.radioGroup}
+                  className="radio-group"
                   onChange={handleChangePayment}
                   value={paymentValue}
                 >
@@ -680,7 +678,7 @@ function Cart() {
                       />
                     }
                     label={
-                      <span className={styles.radioLabel}>
+                      <span className="radio-label">
                         <p>Khi nhận hàng</p>{" "}
                         <MonetizationOnTwoToneIcon
                           style={{
@@ -699,7 +697,7 @@ function Cart() {
                       },
                       width: "30rem",
                     }}
-                    className={styles.radio}
+                    className="radio"
                   />
                   <FormControlLabel
                     value="VNPAY"
@@ -713,7 +711,7 @@ function Cart() {
                       />
                     }
                     label={
-                      <span className={styles.radioLabel}>
+                      <span className="radio-label">
                         <p
                           style={{
                             marginRight: "12.3rem",
@@ -738,7 +736,7 @@ function Cart() {
                       },
                       width: "30rem",
                     }}
-                    className={styles.radio}
+                    className="radio"
                   />
                   <FormControlLabel
                     value="PAYPAL"
@@ -752,7 +750,7 @@ function Cart() {
                       />
                     }
                     label={
-                      <span className={styles.radioLabel}>
+                      <span className="radio-label">
                         <p style={{ marginRight: "12.5rem" }}>PayPal</p>
                         <PaymentTwoToneIcon
                           style={{
@@ -771,7 +769,7 @@ function Cart() {
                       },
                       width: "30rem",
                     }}
-                    className={styles.radio}
+                    className="radio"
                   />
                 </RadioGroup>
               </div>
@@ -792,27 +790,24 @@ function Cart() {
                 ) : null}
               </div>
 
-              <div className={styles.line}></div>
+              <div className="line"></div>
 
-              <div className={styles.voucherWrapper}>
-                <div className={styles.voucherName}>
-                  <SellOutlinedIcon className={styles.voucherIcon} />
+              <div className="voucher-wrapper">
+                <div className="voucher-name">
+                  <SellOutlinedIcon className="voucher-icon" />
                   <p>
                     {voucherId === ""
                       ? "Hãy chọn mã voucher của bạn"
                       : voucherId}
                   </p>
                 </div>
-                <button
-                  className={styles.voucherBtn}
-                  onClick={handleSelectVoucher}
-                >
+                <button className="voucher-btn" onClick={handleSelectVoucher}>
                   <p>Chọn Voucher</p>
                 </button>
               </div>
 
-              <button className={styles.orderBtn} onClick={handleOrderProduct}>
-                <ShoppingCartIcon className={styles.orderIcon} />
+              <button className="order-btn" onClick={handleOrderProduct}>
+                <ShoppingCartIcon className="order-icon" />
                 <p>Đặt hàng</p>
               </button>
             </>
