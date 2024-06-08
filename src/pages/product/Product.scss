@@ -122,9 +122,11 @@
         position: relative;
         border: 0.1rem solid var(--gray-color);
         border-radius: 3rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
 
         &:hover {
           box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.5);
+          transform: translateY(-8px);
         }
 
         .product-img {
@@ -135,7 +137,7 @@
           object-fit: contain;
         }
 
-        .favorite-btn {
+        .favourite-btn {
           position: absolute;
           top: 2rem;
           left: 2rem;

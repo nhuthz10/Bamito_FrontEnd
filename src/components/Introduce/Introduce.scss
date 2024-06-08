@@ -22,13 +22,28 @@
     }
   }
   .introduce-badminton-item {
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
+
+    &:hover {
+      transform: translateY(-8px);
+    }
     .introduce-badminton-item-img {
       height: 100%;
       width: 100%;
       object-fit: contain;
       border-radius: 15px;
       box-shadow: 0px 4px 4px 0px #00000040;
+    }
+    .favourite-btn {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+
+      .favourite-icon {
+        font-size: 3.5rem;
+      }
     }
     .introduce-badminton-item-name {
       line-height: 1.4;

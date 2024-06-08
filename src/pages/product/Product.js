@@ -96,6 +96,8 @@ const Product = () => {
     }
   }, [favourites, productPagination]);
 
+  console.log(productPagination);
+
   const handleClickLike = async (productId, status) => {
     if (userId) {
       try {
@@ -236,7 +238,7 @@ const Product = () => {
                         alt="product"
                       ></img>
                       <button
-                        className="favorite-btn"
+                        className="favourite-btn"
                         onClick={(e) => {
                           e.preventDefault();
                         }}

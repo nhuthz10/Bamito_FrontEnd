@@ -1,7 +1,9 @@
 import "./Introduce.scss";
 import Grid from "@mui/material/Grid";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
+import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
+import { useDispatch, useSelector } from "react-redux";
 import { loadingProduct } from "../../redux-toolkit/productSlice";
 import { Link } from "react-router-dom";
 import { handleGetAllProductOfTheProductType } from "../../services/productService";
@@ -12,11 +14,22 @@ import {
   handleChangePage,
   handleResetPagination,
 } from "../../redux-toolkit/paginationSlice";
+import { updateFavourites } from "../../redux-toolkit/userSlice";
+import {
+  handleCreateFavourite,
+  handleDeleteFavourite,
+  handleGetAllFavourite,
+} from "../../services/userService";
+import _ from "lodash";
 
 const Introduce = ({ productTypesData }) => {
   const [allData, setAllData] = useState([]);
+  const [dataProducts, setDataProducs] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const favourites = useSelector((state) => state.user.favourites);
+  const userId = useSelector((state) => state.user.userInfo?.id);
 
   let getProductClassify = async (racket, shoe, shirt) => {
     try {
@@ -85,6 +98,23 @@ const Introduce = ({ productTypesData }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productTypesData]);
 
+  useEffect(() => {
+    if (favourites && favourites.length > 0) {
+      let newAllData = _.cloneDeep(allData);
+      newAllData = newAllData.map((productType) => {
+        let newProductType = { ...productType };
+        newProductType.data = newProductType.data.map((product) => ({
+          ...product,
+          favourite: favourites.includes(product.productId),
+        }));
+        return newProductType;
+      });
+      setDataProducs(newAllData);
+    } else {
+      setDataProducs(allData);
+    }
+  }, [favourites, allData]);
+
   const currencyFormatter = new Intl.NumberFormat("vi-VN", {
     style: "decimal",
     minimumFractionDigits: 0,
@@ -97,11 +127,44 @@ const Introduce = ({ productTypesData }) => {
     navigate(`product/${productTypeId}`);
   };
 
+  const handleClickLike = async (productId, status) => {
+    if (userId) {
+      try {
+        if (status === "like") {
+          let res = await handleDeleteFavourite(userId, productId);
+          if (res && res.errCode === 0) {
+            let ress = await handleGetAllFavourite(userId);
+            dispatch(updateFavourites(ress?.data));
+          } else {
+            toast.error(res?.message);
+          }
+        }
+        if (status === "noLike") {
+          let res = await handleCreateFavourite({
+            productId: productId,
+            userId: userId,
+          });
+          if (res && res.errCode === 0) {
+            let ress = await handleGetAllFavourite(userId);
+            dispatch(updateFavourites(ress?.data));
+          } else {
+            toast.error(res?.message);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error(error?.response?.data?.message);
+      }
+    } else {
+      toast.error("Vui lòng đăng nhập");
+    }
+  };
+
   return (
     <>
-      {allData &&
-        allData.length > 0 &&
-        allData.map((item, index) => {
+      {dataProducts &&
+        dataProducts.length > 0 &&
+        dataProducts.map((item, index) => {
           return (
             <div className="introduce-badminton" key={index}>
               <div className="introduce-badminton-header">
@@ -137,6 +200,33 @@ const Introduce = ({ productTypesData }) => {
                                       : "contain",
                                 }}
                               ></img>
+                              <button
+                                className="favourite-btn"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                {product.favourite ? (
+                                  <FavoriteTwoToneIcon
+                                    onClick={() => {
+                                      handleClickLike(
+                                        product.productId,
+                                        "like"
+                                      );
+                                    }}
+                                    className="favourite-icon"
+                                    style={{ color: "red" }}
+                                  />
+                                ) : (
+                                  <FavoriteBorderTwoToneIcon
+                                    className="favourite-icon"
+                                    onClick={() => {
+                                      handleClickLike(
+                                        product.productId,
+                                        "noLike"
+                                      );
+                                    }}
+                                  />
+                                )}
+                              </button>
                             </div>
                             <div className="introduce-badminton-item-name">
                               {product.name}
