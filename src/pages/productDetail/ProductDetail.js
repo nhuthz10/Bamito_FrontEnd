@@ -12,6 +12,7 @@ import {
 import CommentAndRatingForm from "./CommentAndRatingForm";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { fetchAllProductCart } from "../../redux-toolkit/cartSlice";
 
 const Line = ({ color }) => (
   <hr
@@ -32,6 +33,7 @@ function ProductDetail() {
   const [stockQuantity, setStockQuantity] = useState(null);
   const isLogin = useSelector((state) => state.user.login);
   const userId = useSelector((state) => state.user.userInfo.id);
+  const cartId = useSelector((state) => state.user.cartId);
   const dispatch = useDispatch();
 
   const { productId } = useParams();
@@ -117,6 +119,7 @@ function ProductDetail() {
               (product.price - (product.price * product.discount) / 100),
           });
           if (res && res.errCode === 0) {
+            dispatch(fetchAllProductCart({ cartId: cartId }));
             toast.success("Thêm sản phẩm vào giỏ hàng thành công");
           }
         } catch (error) {

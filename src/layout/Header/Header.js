@@ -3,11 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tippy from "@tippyjs/react/headless";
+import "tippy.js/dist/tippy.css";
 import {
   faChevronDown,
   faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
-
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { toast } from "react-toastify";
 import logo from "../../assets/logo1.png";
 import "./Header.scss";
@@ -21,6 +22,7 @@ import {
   handleResetPagination,
 } from "../../redux-toolkit/paginationSlice";
 import { USER_MENU } from "../../utils/menu";
+import TippyCart from "../../components/TippyCart/TippyCart";
 
 const ProductTypesMenu = () => {
   const [productTypes, setProductTypes] = useState([]);
@@ -65,15 +67,21 @@ const ProductTypesMenu = () => {
 
 function Header() {
   const [isTippyOn, setIsTippyOn] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const login = useSelector((state) => state.user.login);
   const avatarUser = useSelector((state) => state.user.userInfo?.avatar);
   const roleId = useSelector((state) => state.user.userInfo?.roleData?.roleId);
+  const productCountInCart = useSelector((state) => state.cart?.totalProduct);
 
   const handleLogOut = () => {
     dispatch(logOut());
+  };
+
+  const handleClickCart = () => {
+    navigate("/user/cart");
   };
 
   let handleClickSaleOff = () => {
@@ -122,39 +130,68 @@ function Header() {
 
       <Search></Search>
 
-      {login ? (
-        <div className="header-actions">
+      <div className="header-wrap-cart-actions">
+        {login ? (
           <Tippy
-            interactive
             placement="bottom-end"
-            delay={[0, 300]}
+            interactive
+            arrow={true}
+            delay={[0, 100]}
+            offset={[-26, 5]}
             render={(attrs) => (
-              <UserMenu
-                attrs={attrs}
-                handleLogOut={handleLogOut}
-                menu={USER_MENU}
-                roleId={roleId}
-              />
+              <div
+                className="drop-down-menu"
+                tabIndex="-1"
+                {...attrs}
+                style={{ width: 550, borderRadius: 5 }}
+              >
+                <TippyCart></TippyCart>
+              </div>
             )}
           >
-            <button className="header-action-btn">
-              <img
-                src={avatarUser ? avatarUser : avatarDefault}
-                alt="avt"
-                className="action-avatar"
-                style={{ border: "1px solid var(--primary-color)" }}
-              />
-            </button>
+            <div className="header-cart" onClick={handleClickCart}>
+              <ShoppingCartOutlinedIcon className="header-cart-icon"></ShoppingCartOutlinedIcon>
+              <span className="header-cart-notification">
+                {productCountInCart}
+              </span>
+            </div>
           </Tippy>
-        </div>
-      ) : (
-        <div className="header-action-btn">
-          <Link to="/login" className="login-btn">
-            <FontAwesomeIcon icon={faRightToBracket} />
-            Đăng nhập
-          </Link>
-        </div>
-      )}
+        ) : null}
+
+        {login ? (
+          <div className="header-actions">
+            <Tippy
+              interactive
+              placement="bottom-end"
+              delay={[0, 300]}
+              render={(attrs) => (
+                <UserMenu
+                  attrs={attrs}
+                  handleLogOut={handleLogOut}
+                  menu={USER_MENU}
+                  roleId={roleId}
+                />
+              )}
+            >
+              <button className="header-action-btn">
+                <img
+                  src={avatarUser ? avatarUser : avatarDefault}
+                  alt="avt"
+                  className="action-avatar"
+                  style={{ border: "1px solid var(--primary-color)" }}
+                />
+              </button>
+            </Tippy>
+          </div>
+        ) : (
+          <div className="header-action-btn">
+            <Link to="/login" className="login-btn">
+              <FontAwesomeIcon icon={faRightToBracket} />
+              Đăng nhập
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

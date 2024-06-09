@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -34,11 +33,7 @@ const UserMenu = ({ attrs, handleLogOut, menu, roleId }) => {
                   }}
                 />
               )}
-              <div
-                // to={item.to}
-                className="userMenuItem"
-                onClick={handleLogOut}
-              >
+              <div className="userMenuItem" onClick={handleLogOut}>
                 <item.icon className="icon" />
                 <p className="text">{item.text}</p>
               </div>

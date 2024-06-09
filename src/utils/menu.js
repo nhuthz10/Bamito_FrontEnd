@@ -14,12 +14,6 @@ export const USER_MENU = [
     type: "USER",
   },
   {
-    to: "/user/cart",
-    icon: ShoppingCartOutlinedIcon,
-    text: "Giỏ hàng",
-    type: "USER",
-  },
-  {
     to: "/user/favourite",
     icon: LoyaltyIcon,
     text: "Sản phẩm yêu thích",

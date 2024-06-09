@@ -69,45 +69,85 @@
     }
   }
 
-  .header-actions {
-    height: 100%;
+  .header-wrap-cart-actions {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 28px;
 
+    .header-cart {
+      position: relative;
+      padding: 5px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+
+      .header-cart-notification {
+        position: absolute;
+        top: -7px;
+        right: -6px;
+        display: flex;
+        font-size: 1.3rem;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        height: 22px;
+        width: 22px;
+        border-radius: 50%;
+        background-color: #ff0000;
+        color: var(--white-color);
+      }
+
+      .header-cart-icon {
+        position: relative;
+        top: 2px;
+        font-size: 4rem;
+        color: var(--primary-color);
+      }
+
+      &:hover {
+        background-color: #f6e0d4;
+      }
+    }
+
+    .header-actions {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .header-action-btn {
+        color: var(--primary-color);
+        font-size: 3rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        .action-avatar {
+          height: 50px;
+          width: 50px;
+          object-fit: cover;
+          border-radius: 100%;
+        }
+      }
+    }
     .header-action-btn {
       color: var(--primary-color);
       font-size: 3rem;
       height: 100%;
       display: flex;
       align-items: center;
-
-      .action-avatar {
-        height: 50px;
-        width: 50px;
-        object-fit: cover;
-        border-radius: 100%;
-      }
     }
-  }
-  .header-action-btn {
-    color: var(--primary-color);
-    font-size: 3rem;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-  .login-btn {
-    width: 13rem;
-    height: 4rem;
+    .login-btn {
+      width: 13rem;
+      height: 4rem;
 
-    border-radius: 10rem;
-    background: linear-gradient(to right, var(--second-color), #ff3778);
-    color: white;
-    font-size: var(--small-fontSize);
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+      border-radius: 10rem;
+      background: linear-gradient(to right, var(--second-color), #ff3778);
+      color: white;
+      font-size: var(--small-fontSize);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
   }
 }
 

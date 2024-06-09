@@ -9,6 +9,7 @@ import productSlice from "./productSlice";
 import adminSlice from "./adminSlice";
 import searchSlice from "./searchSlice";
 import orderSlice from "./orderSlice";
+import cartSlice from "./cartSlice";
 
 const persistCommonConfig = {
   storage: storage,
@@ -29,6 +30,7 @@ const store = configureStore({
   reducer: {
     user: persistReducer(userPersistConfig, userSlice),
     order: orderSlice,
+    cart: cartSlice,
     pagination: paginationSlice,
     product: productSlice,
     search: searchSlice,

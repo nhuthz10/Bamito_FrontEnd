@@ -13,7 +13,6 @@ import PaymentTwoToneIcon from "@mui/icons-material/PaymentTwoTone";
 import SellOutlinedIcon from "@mui/icons-material/SellOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
-  handleGetAllProductCart,
   handleUpdateProductCartService,
   handleDeleteProductCartService,
   handleCreateNewOrderService,
@@ -21,12 +20,16 @@ import {
 } from "../../services/productService";
 import { handleGetInforUserService } from "../../services/userService";
 import { handleGetPaypalClientId } from "../../services/productService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Cart.scss";
 import Voucher from "../../components/voucher/Voucher";
 import { useDebounce } from "../../utils/commonUtils";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import {
+  fetchAllProductCart,
+  updateAllProduct,
+} from "../../redux-toolkit/cartSlice";
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
   style: "decimal",
@@ -36,7 +39,6 @@ const currencyFormatter = new Intl.NumberFormat("vi-VN", {
 
 function Cart() {
   const [paymentValue, setPaymentValue] = useState("COD");
-  const [allProduct, setAllProduct] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
   const [voucherSelect, setVoucherSelect] = useState(false);
   const [voucherPrice, setVoucherPrice] = useState(0);
@@ -46,9 +48,11 @@ function Cart() {
   const [pricePaypal, setPricePaypal] = useState("");
   const cartId = useSelector((state) => state.user.cartId);
   const userId = useSelector((state) => state.user.userInfo.id);
+  const allProduct = useSelector((state) => state.cart.allProduct);
   const paymentRef = useRef(null);
   const [userInfo, setUserInfo] = useState({});
   const navigation = useNavigate();
+  const dispatch = useDispatch();
 
   let currentProductDebounce = useDebounce(currentProduct, 500);
 
@@ -165,21 +169,16 @@ function Cart() {
   };
 
   const getAllProductCart = async () => {
-    try {
-      let res = await handleGetAllProductCart(cartId);
-      if (res && res.errCode === 0) {
-        setAllProduct(res?.data);
-        let totalPrice = res?.data?.reduce(
-          (accumulator, product) => product.totalPrice + accumulator,
-          0
-        );
-        setCurrentTotalPrice(totalPrice);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.message);
-    }
+    await dispatch(fetchAllProductCart({ cartId: cartId }));
   };
+
+  useEffect(() => {
+    let totalPrice = allProduct.reduce(
+      (accumulator, product) => product.totalPrice + accumulator,
+      0
+    );
+    setCurrentTotalPrice(totalPrice);
+  }, [allProduct]);
 
   const handleChangePayment = (e) => {
     if (!userInfo.phone) {
@@ -220,20 +219,23 @@ function Cart() {
           item.productId === product.productId &&
           item.sizeId === product.sizeId
         ) {
-          item.quantity = item.quantity - 1;
+          return { ...item, quantity: item.quantity - 1 };
         }
         return item;
       });
       setCurrentProduct({
         cartId: cartId,
         productId: product.productId,
-        quantity: product.quantity,
+        quantity: currentProduct.find(
+          (item) => item.productId === product.productId
+        ).quantity,
         sizeId: product.sizeId,
         totalPrice:
-          +product.quantity *
+          +currentProduct.find((item) => item.productId === product.productId)
+            .quantity *
           (+product.price - (+product.price * +product.discount) / 100),
       });
-      setAllProduct(currentProduct);
+      dispatch(updateAllProduct(currentProduct));
     }
   };
 
@@ -244,20 +246,23 @@ function Cart() {
           item.productId === product.productId &&
           item.sizeId === product.sizeId
         ) {
-          item.quantity = item.quantity + 1;
+          return { ...item, quantity: item.quantity + 1 };
         }
         return item;
       });
       setCurrentProduct({
         cartId: cartId,
         productId: product.productId,
-        quantity: product.quantity,
+        quantity: currentProduct.find(
+          (item) => item.productId === product.productId
+        ).quantity,
         sizeId: product.sizeId,
         totalPrice:
-          +product.quantity *
+          +currentProduct.find((item) => item.productId === product.productId)
+            .quantity *
           (+product.price - (+product.price * +product.discount) / 100),
       });
-      setAllProduct(currentProduct);
+      dispatch(updateAllProduct(currentProduct));
     }
   };
 
