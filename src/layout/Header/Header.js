@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tippy from "@tippyjs/react/headless";
 import "tippy.js/dist/tippy.css";
+import "tippy.js/animations/shift-away.css";
 import {
   faChevronDown,
   faRightToBracket,
@@ -135,7 +136,6 @@ function Header() {
           <Tippy
             placement="bottom-end"
             interactive
-            arrow={true}
             delay={[0, 100]}
             offset={[-26, 5]}
             render={(attrs) => (

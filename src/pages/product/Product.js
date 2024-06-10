@@ -96,8 +96,6 @@ const Product = () => {
     }
   }, [favourites, productPagination]);
 
-  console.log(productPagination);
-
   const handleClickLike = async (productId, status) => {
     if (userId) {
       try {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchAllProductCart } from "../../redux-toolkit/cartSlice";
+import noProduct from "../../assets/noProduct.png";
 import "./TippyCart.scss";
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
@@ -28,8 +29,7 @@ const TippyCart = () => {
   return (
     <div className="tippy-cart-container">
       <h2 className="tippy-cart-title">Sản Phẩm Mới Thêm</h2>
-      {products &&
-        products.length > 0 &&
+      {products && products.length > 0 ? (
         products.map((product, index) => {
           if (index >= 5) return null;
           return (
@@ -58,22 +58,34 @@ const TippyCart = () => {
               </div>
             </Link>
           );
-        })}
-      <div className="tippy-cart-footer">
-        {productCountInCart > 5 ? (
-          <span className="count-product-in-cart">
-            {productCountInCart - 5} Thêm Hàng Vào Giỏ
-          </span>
-        ) : null}
+        })
+      ) : (
+        <div className="no-product">
+          <h2 style={{ textAlign: "center" }}>Không có sản phẩm nào</h2>
+          <img
+            src={noProduct}
+            alt=":(("
+            style={{ width: "100%", height: "400px" }}
+          />
+        </div>
+      )}
+      {products && products?.length > 0 ? (
+        <div className="tippy-cart-footer">
+          {productCountInCart > 5 ? (
+            <span className="count-product-in-cart">
+              {productCountInCart - 5} Thêm Hàng Vào Giỏ
+            </span>
+          ) : null}
 
-        <Link
-          to={"/user/cart"}
-          className="btn-show-cart"
-          style={{ marginLeft: "auto" }}
-        >
-          Xem giỏ hàng
-        </Link>
-      </div>
+          <Link
+            to={"/user/cart"}
+            className="btn-show-cart"
+            style={{ marginLeft: "auto" }}
+          >
+            Xem giỏ hàng
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 };
