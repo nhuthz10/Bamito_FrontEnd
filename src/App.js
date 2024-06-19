@@ -40,6 +40,8 @@ function App() {
           dispatch(logOut());
           toast.error("Phiên bản đăng nhập đã hết hạn");
         }
+      } else {
+        config.headers["Authorization"] = `Bearer ${access_token}`;
       }
       return config;
     },

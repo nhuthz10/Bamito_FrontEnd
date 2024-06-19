@@ -7,10 +7,8 @@ import {
   updateFavourites,
   updateCartId,
 } from "../../redux-toolkit/userSlice";
-import {
-  handleLoginService,
-  handleCreatCart,
-} from "../../services/userService";
+import { handleLoginService } from "../../services/userService";
+import { handleCreatCartService } from "../../services/cartService";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -56,14 +54,11 @@ function Login() {
         if (res?.access_token) {
           const decoded = jwtDecode(res?.access_token);
           if (decoded?.id) {
-            let useInfor = await handleGetUserAfterLoginService(
-              res?.access_token,
-              decoded?.id
-            );
+            let useInfor = await handleGetUserAfterLoginService(decoded?.id);
             if (useInfor?.errCode === 0) {
               dispatch(logIn(useInfor?.user));
               dispatch(updateFavourites(useInfor?.favourites));
-              let cartId = await handleCreatCart({
+              let cartId = await handleCreatCartService({
                 userId: useInfor?.user?.id,
               });
               dispatch(updateCartId(cartId?.data));

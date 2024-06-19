@@ -13,13 +13,15 @@ import PaymentTwoToneIcon from "@mui/icons-material/PaymentTwoTone";
 import SellOutlinedIcon from "@mui/icons-material/SellOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
-  handleUpdateProductCartService,
-  handleDeleteProductCartService,
   handleCreateNewOrderService,
   handlePaymentByVnPayService,
-} from "../../services/productService";
+} from "../../services/orderService";
+import {
+  handleUpdateProductCartService,
+  handleDeleteProductCartService,
+} from "../../services/cartService";
 import { handleGetInforUserService } from "../../services/userService";
-import { handleGetPaypalClientId } from "../../services/productService";
+import { handleGetPaypalClientId } from "../../services/orderService";
 import { useDispatch, useSelector } from "react-redux";
 import "./Cart.scss";
 import Voucher from "../../components/voucher/Voucher";
@@ -58,8 +60,7 @@ function Cart() {
 
   let getInforUser = async () => {
     try {
-      let access_token = localStorage.getItem("access_token");
-      let res = await handleGetInforUserService(userId, access_token);
+      let res = await handleGetInforUserService(userId);
       if (res && res.errCode === 0) {
         setUserInfo({
           name: res?.data?.userName,
@@ -169,7 +170,7 @@ function Cart() {
   };
 
   const getAllProductCart = async () => {
-    await dispatch(fetchAllProductCart({ cartId: cartId }));
+    await dispatch(fetchAllProductCart({ userId: userId }));
   };
 
   useEffect(() => {
@@ -224,7 +225,7 @@ function Cart() {
         return item;
       });
       setCurrentProduct({
-        cartId: cartId,
+        userId: userId,
         productId: product.productId,
         quantity: currentProduct.find(
           (item) => item.productId === product.productId
@@ -251,7 +252,7 @@ function Cart() {
         return item;
       });
       setCurrentProduct({
-        cartId: cartId,
+        userId: userId,
         productId: product.productId,
         quantity: currentProduct.find(
           (item) => item.productId === product.productId
@@ -269,9 +270,9 @@ function Cart() {
   const handleDeleteProductCart = async (product) => {
     try {
       let res = await handleDeleteProductCartService(
-        cartId,
         product.productId,
-        product.sizeId
+        product.sizeId,
+        userId
       );
       if (res && res.errCode === 0) {
         getAllProductCart();
@@ -322,8 +323,6 @@ function Cart() {
               status: 1,
             });
             if (res && res.errCode === 0) {
-              // getAllProductCart();
-              // toast.success("Đặt hàng thành công");
               window.location.href = res.urlPayment;
             }
           } catch (error) {

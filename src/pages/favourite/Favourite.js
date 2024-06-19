@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PaginatedItems from "../../components/Pagination/Pagination";
-import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 import Rating from "@mui/material/Rating";
 import noProduct from "../../assets/noProduct.png";
 import {
-  handleCreateFavourite,
   handleDeleteFavourite,
   handleGetAllFavourite,
 } from "../../services/userService";
@@ -18,6 +16,7 @@ import { Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { LIMIT_SEARCH } from "../../utils";
 import "./Favourite.scss";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
   style: "decimal",
@@ -26,58 +25,33 @@ const currencyFormatter = new Intl.NumberFormat("vi-VN", {
 });
 
 function Favourite() {
-  const [paginationData, setPaginationData] = useState([]);
   const userId = useSelector((state) => state.user.userInfo?.id);
-  const favourites = useSelector((state) => state.user.favourites);
   const productPagination = useSelector(
     (state) => state.product.allProductFavourite.data
   );
   const pageCount = useSelector((state) => state.pagination.page);
+  const totalPage = useSelector(
+    (state) => state.product.allProductFavourite.totalPage
+  );
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (favourites && favourites?.length > 0) {
-      let newPaginationData = productPagination?.map((product) => {
-        let newProduct = { ...product };
-        newProduct.favourite = favourites?.includes(product.productId);
-        return newProduct;
-      });
-      setPaginationData(newPaginationData);
-    } else {
-      setPaginationData(productPagination);
-    }
-  }, [favourites, productPagination]);
-
-  const handleClickLike = async (productId, status) => {
+  const handleClickLike = async (productId, isLastProduct) => {
     if (userId) {
       try {
-        if (status === "like") {
-          let res = await handleDeleteFavourite(userId, productId);
-          if (res && res.errCode === 0) {
-            let ress = await handleGetAllFavourite(userId);
-            dispatch(updateFavourites(ress?.data));
-            await dispatch(
-              fetchAllProductFavouriteRedux({
-                userId: userId,
-                limit: LIMIT_SEARCH,
-                page: pageCount,
-              })
-            );
-          } else {
-            toast.error(res?.message);
-          }
-        }
-        if (status === "noLike") {
-          let res = await handleCreateFavourite({
-            productId: productId,
-            userId: userId,
-          });
-          if (res && res.errCode === 0) {
-            let ress = await handleGetAllFavourite(userId);
-            dispatch(updateFavourites(ress?.data));
-          } else {
-            toast.error(res?.message);
-          }
+        let res = await handleDeleteFavourite(userId, productId);
+        if (res && res.errCode === 0) {
+          let ress = await handleGetAllFavourite(userId);
+          dispatch(updateFavourites(ress?.data));
+          await dispatch(
+            fetchAllProductFavouriteRedux({
+              userId: userId,
+              limit: LIMIT_SEARCH,
+              page: isLastProduct ? pageCount - 1 : pageCount,
+            })
+          );
+          if (isLastProduct) dispatch(handleChangePage(pageCount - 1));
+        } else {
+          toast.error(res?.message);
         }
       } catch (error) {
         console.log(error);
@@ -91,8 +65,8 @@ function Favourite() {
   return (
     <div className="favourite-container">
       <Grid container spacing={5}>
-        {paginationData && paginationData?.length > 0 ? (
-          paginationData?.map((item, index) => {
+        {productPagination && productPagination?.length > 0 ? (
+          productPagination?.map((item, index) => {
             return (
               <Grid item xs={3} key={index}>
                 <Link
@@ -116,22 +90,19 @@ function Favourite() {
                       e.preventDefault();
                     }}
                   >
-                    {item.favourite ? (
-                      <FavoriteTwoToneIcon
-                        onClick={() => {
-                          handleClickLike(item.productId, "like");
-                        }}
-                        className="icon"
-                        style={{ color: "red" }}
-                      />
-                    ) : (
-                      <FavoriteBorderTwoToneIcon
-                        className="icon"
-                        onClick={() => {
-                          handleClickLike(item.productId, "noLike");
-                        }}
-                      />
-                    )}
+                    <FavoriteTwoToneIcon
+                      onClick={() => {
+                        handleClickLike(
+                          item.productId,
+                          productPagination?.length === 1 &&
+                            totalPage === pageCount
+                            ? true
+                            : false
+                        );
+                      }}
+                      className="icon"
+                      style={{ color: "red" }}
+                    />
                   </button>
 
                   <div className="productInfo">

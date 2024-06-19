@@ -10,18 +10,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { LIMIT } from "../../utils";
 import { loadingAdmin } from "../../redux-toolkit/adminSlice";
 import GridData from "../../components/gridData";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 function UserAdmin() {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.pagination.page);
+  const totalPage = useSelector((state) => state.admin.allUser?.totalPage);
 
-  const handleDeleteUser = async (user) => {
+  const handleDeleteUser = async (user, isLast) => {
     try {
       dispatch(loadingAdmin(true));
-      let access_token = localStorage.getItem("access_token");
-      let res = await handleDeleteService(user.id, access_token);
+      let res = await handleDeleteService(user.id);
       if (res && res.errCode === 0) {
-        await dispatch(fetchAllUserRedux({ limit: LIMIT, page: page }));
+        await dispatch(
+          fetchAllUserRedux({
+            limit: LIMIT,
+            page: totalPage === page && isLast ? page - 1 : page,
+          })
+        );
+        if (totalPage === page && isLast) dispatch(handleChangePage(page - 1));
         await dispatch(fetchAllRoleRedux());
         toast.success("Xóa người dùng thành công");
       }

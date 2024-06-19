@@ -4,10 +4,7 @@ import "./ordersHistory.scss";
 import PaginatedItems from "../../components/Pagination/Pagination";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 import dayjs from "dayjs";
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
@@ -54,7 +51,6 @@ function OrdersHistory() {
     setAllStatus(result);
     setOrderStatus(status.key);
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
   };
 
   const formatterDate = (date) => {

@@ -12,19 +12,22 @@ import { handleDeleteProductSizeService } from "../../services/productService";
 import "../admin.scss";
 import GridData from "../../components/gridData";
 import { LIMIT } from "../../utils";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 function ProductSizeAdmin() {
   const { state } = useLocation();
-  // const { data } = state || {};
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.admin.productData);
   const page = useSelector((state) => state.pagination.page);
+  const totalPage = useSelector(
+    (state) => state.admin.allProductSize?.totalPage
+  );
 
   if (state) {
     dispatch(CRUDProductSize(state));
   }
 
-  const handleDeleteProductSize = async (productSize) => {
+  const handleDeleteProductSize = async (productSize, isLast) => {
     try {
       dispatch(loadingAdmin(true));
       let res = await handleDeleteProductSizeService(productSize.id);
@@ -33,7 +36,7 @@ function ProductSizeAdmin() {
           fetchAllProductSizeRedux({
             productId: productData?.productId,
             limit: LIMIT,
-            page: page,
+            page: totalPage === page && isLast ? page - 1 : page,
           })
         );
         await dispatch(
@@ -41,6 +44,7 @@ function ProductSizeAdmin() {
             productData?.productTypeData?.productTypeId
           )
         );
+        if (totalPage === page && isLast) dispatch(handleChangePage(page - 1));
         toast.success("Xóa kích cỡ sản phẩm thành công");
       }
     } catch (err) {

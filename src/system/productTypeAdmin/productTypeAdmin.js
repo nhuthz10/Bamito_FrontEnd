@@ -9,12 +9,16 @@ import { useDispatch, useSelector } from "react-redux";
 import "../admin.scss";
 import GridData from "../../components/gridData";
 import { LIMIT } from "../../utils";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 function ProductTypeAdmin() {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.pagination.page);
+  const totalPage = useSelector(
+    (state) => state.admin.allProductType?.totalPage
+  );
 
-  const handleDeleteProductType = async (productType) => {
+  const handleDeleteProductType = async (productType, isLast) => {
     try {
       dispatch(loadingAdmin(true));
       let res = await handleDeleteProductTypeService(productType.id);
@@ -22,10 +26,11 @@ function ProductTypeAdmin() {
         dispatch(
           fetchAllProductTypeRedux({
             limit: LIMIT,
-            page: page,
+            page: totalPage === page && isLast ? page - 1 : page,
             pagination: true,
           })
         );
+        if (totalPage === page && isLast) dispatch(handleChangePage(page - 1));
         toast.success("Xóa loại sản phẩm thành công");
       }
     } catch (err) {

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 import { Link, useLocation } from "react-router-dom";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -122,7 +119,6 @@ function AdminSidebar() {
 
   const handleClickMenuItem = (id, path) => {
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
     navigate(path);
     setSelectedItem(id);
   };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchAllProductCart } from "../../redux-toolkit/cartSlice";
@@ -13,6 +13,7 @@ const currencyFormatter = new Intl.NumberFormat("vi-VN", {
 
 const TippyCart = () => {
   const cartId = useSelector((state) => state?.user?.cartId);
+  const userId = useSelector((state) => state.user.userInfo?.id);
   const products = useSelector((state) => state?.cart?.allProduct);
   const productCountInCart = useSelector((state) => state.cart?.totalProduct);
 
@@ -20,7 +21,7 @@ const TippyCart = () => {
 
   useEffect(() => {
     const getData = async () => {
-      await dispatch(fetchAllProductCart({ cartId: cartId }));
+      await dispatch(fetchAllProductCart({ userId: userId }));
     };
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -10,12 +10,14 @@ import { useDispatch } from "react-redux";
 import GridData from "../../components/gridData";
 import { LIMIT } from "../../utils";
 import { useSelector } from "react-redux";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 function BrandAdmin() {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.pagination.page);
+  const totalPage = useSelector((state) => state.admin.allBrand?.totalPage);
 
-  const handleDeleteBrand = async (brand) => {
+  const handleDeleteBrand = async (brand, isLast) => {
     try {
       dispatch(loadingAdmin(true));
       let res = await handleDeleteBrandService(brand.id);
@@ -23,10 +25,11 @@ function BrandAdmin() {
         await dispatch(
           fetchAllBrandRedux({
             limit: LIMIT,
-            page: page,
+            page: totalPage === page && isLast ? page - 1 : page,
             pagination: true,
           })
         );
+        if (totalPage === page && isLast) dispatch(handleChangePage(page - 1));
         toast.success("Xóa thương hiệu thành công");
       }
     } catch (err) {

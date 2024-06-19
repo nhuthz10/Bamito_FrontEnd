@@ -43,8 +43,7 @@ function Profile() {
   let getInforUser = async () => {
     dispatch(loadingProduct(true));
     try {
-      let access_token = localStorage.getItem("access_token");
-      let res = await handleGetInforUserService(userId, access_token);
+      let res = await handleGetInforUserService(userId);
       if (res && res.errCode === 0) {
         setName(res?.data?.userName);
         setValue("email", res?.data?.email);
@@ -127,7 +126,7 @@ function Profile() {
         toast.error(err?.response?.data?.message);
       }
     } finally {
-      dispatch(loadingProduct(true));
+      dispatch(loadingProduct(false));
     }
   };
 

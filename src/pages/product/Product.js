@@ -25,10 +25,7 @@ import { sortBy } from "../../utils/index";
 import noProduct from "../../assets/noProduct.png";
 import { toast } from "react-toastify";
 import { updateFavourites } from "../../redux-toolkit/userSlice";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
   style: "decimal",
@@ -57,7 +54,6 @@ const Product = () => {
   useEffect(() => {
     dispatch(handleSortProduct(sortValue.id));
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
     dispatch(
       handleFilterProduct({
         brandId: debounceBrands,

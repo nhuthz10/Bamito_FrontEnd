@@ -18,10 +18,7 @@ import { path } from "../../utils";
 import ModalDelete from "../../components/modalDelete";
 import { useForm, Controller } from "react-hook-form";
 import { LIMIT } from "../../utils";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 import {
   handleChangeSearchProductAdmin,
   handleChangeTimeReport,
@@ -88,7 +85,6 @@ function GridData({
   };
   const handleClickSearch = () => {
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
     dispatch(handleChangeSearchProductAdmin(searchText.trim()));
   };
 
@@ -150,7 +146,6 @@ function GridData({
 
   const handleClickSizeProduct = (item) => {
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
     navigate(path.PRODUCT_PRODUCTSIZE_ADMIN, { state: item });
   };
 
@@ -585,7 +580,11 @@ function GridData({
                             color="#1976d2"
                           />
                         </Link>
-                        <ModalDelete handleDelete={() => handleDelete(item)} />
+                        <ModalDelete
+                          handleDelete={() =>
+                            handleDelete(item, PaginationData?.length === 1)
+                          }
+                        />
                       </div>
                     </td>
                   )}

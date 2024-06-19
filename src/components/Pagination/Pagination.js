@@ -26,15 +26,13 @@ import { fetchAllOrderRedux } from "../../redux-toolkit/orderSlice";
 import { fetchAllProductSearchRedux } from "../../redux-toolkit/searchSlice";
 import { loadingAdmin } from "../../redux-toolkit/adminSlice";
 import { LIMIT, LIMIT_PRODUCT, LIMIT_SEARCH, LIMIT_ORDER } from "../../utils";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 import "./Pagination.scss";
 
 function PaginatedItems({ type, productTypeId, orderStatus }) {
   const dispatch = useDispatch();
   const [totalPage, setTotalPage] = useState(1);
+  const currentPage = useSelector((state) => state.pagination.page);
   const totalPageUser = useSelector((state) => state.admin.allUser.totalPage);
   const totalPageBrand = useSelector((state) => state.admin.allBrand.totalPage);
   const totalPageProductType = useSelector(
@@ -100,7 +98,6 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
         dispatch(loadingAdmin(true));
         await dispatch(fetchAllUserRedux({ limit: LIMIT, page: pageCount }));
         await dispatch(fetchAllRoleRedux());
-        dispatch(handleResetPagination(false));
         dispatch(loadingAdmin(false));
       };
       getAllDataUser();
@@ -114,7 +111,6 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             pagination: true,
           })
         );
-        dispatch(handleResetPagination(false));
         dispatch(loadingAdmin(false));
       };
       getAllDataBrand();
@@ -128,7 +124,7 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             pagination: true,
           })
         );
-        dispatch(handleResetPagination(false));
+
         dispatch(loadingAdmin(false));
       };
       getAllDataProductType();
@@ -141,7 +137,7 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             pagination: false,
           })
         );
-        dispatch(handleResetPagination(false));
+
         dispatch(loadingAdmin(false));
       };
       getAllDataSize();
@@ -165,7 +161,7 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             pagination: false,
           })
         );
-        dispatch(handleResetPagination(false));
+
         dispatch(loadingAdmin(false));
       };
       getAllDataProduct();
@@ -184,7 +180,7 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             productData?.productTypeData?.productTypeId
           )
         );
-        dispatch(handleResetPagination(false));
+
         dispatch(loadingAdmin(false));
       };
       getAllDataProductSize();
@@ -203,7 +199,6 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
           })
         );
         dispatch(loadingProduct(false));
-        dispatch(handleResetPagination(false));
       };
       getAllDataProduct();
     } else if (type === "search-product") {
@@ -217,8 +212,6 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
           })
         );
         dispatch(loadingProduct(false));
-        dispatch(handleResetPagination(false));
-        dispatch(handleResetPagination(false));
       };
       getAllDataSearch();
     } else if (type === "voucher") {
@@ -232,7 +225,6 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
           })
         );
         dispatch(loadingAdmin(false));
-        dispatch(handleResetPagination(false));
       };
       getAllDataVoucher();
     } else if (type === "order") {
@@ -247,8 +239,6 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
           })
         );
         dispatch(loadingProduct(false));
-        dispatch(handleResetPagination(false));
-        dispatch(handleResetPagination(false));
       };
       getAllOrder();
     } else if (type === "order-admin") {
@@ -261,7 +251,7 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             status: orderStatus,
           })
         );
-        dispatch(handleResetPagination(false));
+
         dispatch(loadingAdmin(false));
       };
       getAllOrder();
@@ -275,7 +265,6 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
           })
         );
         dispatch(loadingProduct(false));
-        dispatch(handleResetPagination(false));
       };
       getAllDataProduct();
     } else if (type === "report-admin") {
@@ -289,7 +278,7 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             timeEnd: timeReport.timeEnd,
           })
         );
-        dispatch(handleResetPagination(false));
+
         dispatch(loadingAdmin(false));
       };
       getAllProduct();
@@ -304,7 +293,6 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
           })
         );
         dispatch(loadingProduct(false));
-        dispatch(handleResetPagination(false));
       };
       getAllDataProduct();
     }
@@ -395,6 +383,7 @@ function PaginatedItems({ type, productTypeId, orderStatus }) {
             </button>
           }
           onPageChange={handlePageClick}
+          forcePage={currentPage - 1}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
           pageCount={totalPage ? totalPage : 1}

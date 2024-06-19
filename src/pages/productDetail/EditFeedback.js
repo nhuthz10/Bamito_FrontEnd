@@ -9,6 +9,7 @@ function EditFeedback({ data, setIsOpen, getAllDataFeedback }) {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const isLogin = useSelector((state) => state.user.login);
+  const userId = useSelector((state) => state.user.userInfo?.id);
 
   useEffect(() => {
     if (data) {
@@ -29,7 +30,8 @@ function EditFeedback({ data, setIsOpen, getAllDataFeedback }) {
     if (isLogin) {
       try {
         let res = await handleUpdateFeedbackService({
-          id: data.id,
+          userId: userId,
+          feedbackId: data.id,
           description: comment,
           rating: rating,
         });

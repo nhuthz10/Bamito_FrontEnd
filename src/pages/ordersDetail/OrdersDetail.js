@@ -4,17 +4,14 @@ import Box from "@mui/material/Box";
 import {
   handleGetOrderDetailService,
   handleCancleOrderService,
-} from "../../services/productService";
+} from "../../services/orderService";
 import "./OrdersDetail.scss";
 import dayjs from "dayjs";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
   style: "decimal",
@@ -25,13 +22,14 @@ const currencyFormatter = new Intl.NumberFormat("vi-VN", {
 function OrdersDetail() {
   const [orderDetailData, setOrderDetailData] = useState({});
   const [orderStatus, setOrderStatus] = useState(null);
+  const userId = useSelector((state) => state.user.userInfo?.id);
 
   let { orderId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let getOrderDeatil = async () => {
     try {
-      let res = await handleGetOrderDetailService(orderId);
+      let res = await handleGetOrderDetailService(orderId, userId);
       if (res && res.errCode === 0) {
         setOrderDetailData(res?.data);
         switch (res?.data?.status) {
@@ -65,13 +63,13 @@ function OrdersDetail() {
   let handleCancelOrder = async () => {
     try {
       let res = await handleCancleOrderService({
+        userId: userId,
         orderId: orderId,
         orderDetail: orderDetailData?.orderDetail,
       });
       if (res && res.errCode === 0) {
         toast.success("Hũy đơn hàng thành công");
         dispatch(handleChangePage(1));
-        dispatch(handleResetPagination(true));
         navigate("/user/orders");
       }
     } catch (error) {

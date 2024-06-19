@@ -12,9 +12,11 @@ import {
   handleGetAllProductSizeService,
   handleGetAllSizeOfTheProductType,
   handleGetAllVoucher,
+} from "../services/productService";
+import {
   handleGetAllOrderAdmin,
   handleGetAllProductReport,
-} from "../services/productService";
+} from "../services/orderService";
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -42,12 +44,10 @@ export const fetchAllUserRedux = createAsyncThunk(
   "admin/fetchAllUserRedux",
   async (params, thunkAPI) => {
     try {
-      let access_token = localStorage.getItem("access_token");
       let res = await handleGetAllUserService(
         params?.limit,
         params?.page,
-        params?.name,
-        access_token
+        params?.name
       );
       if (res && res.errCode === 0) {
         thunkAPI.dispatch(fetchAllUserSuccess(res));
@@ -66,8 +66,7 @@ export const fetchAllRoleRedux = createAsyncThunk(
   "admin/fetchAllRoleRedux",
   async (params, thunkAPI) => {
     try {
-      let access_token = localStorage.getItem("access_token");
-      let res = await handleGetAllRoleService(access_token);
+      let res = await handleGetAllRoleService();
       if (res && res.errCode === 0) {
         thunkAPI.dispatch(fetchAllRoleSuccess(res?.data));
       } else {
@@ -220,7 +219,6 @@ export const fetchAllVoucherRedux = createAsyncThunk(
       let res = await handleGetAllVoucher(
         params?.limit,
         params?.page,
-        params?.name,
         params?.pagination
       );
       if (res && res.errCode === 0) {

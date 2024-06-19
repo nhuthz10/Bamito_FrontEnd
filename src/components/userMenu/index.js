@@ -1,10 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 import "./userMenu.scss";
 
 const UserMenu = ({ attrs, handleLogOut, menu, roleId }) => {
@@ -12,7 +9,6 @@ const UserMenu = ({ attrs, handleLogOut, menu, roleId }) => {
   const dispatch = useDispatch();
   let handleClickItem = (to) => {
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
     navigate(to);
   };
 

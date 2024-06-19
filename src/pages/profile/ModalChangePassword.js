@@ -22,15 +22,11 @@ const ModalChangePassword = ({ open, handleCloseModal, setIsOpen }) => {
   const handleChangePassword = async (data) => {
     setCheckPassword(false);
     try {
-      let access_token = localStorage.getItem("access_token");
-      let res = await handleChangePasswordProfile(
-        {
-          id: userId,
-          currentPassword: data.currentPassword,
-          newPassword: data.newPassword,
-        },
-        access_token
-      );
+      let res = await handleChangePasswordProfile({
+        id: userId,
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+      });
       if (res && res.errCode === 0) {
         toast.success("Thay đổi mật khẩu thành công");
         setValue("currentPassword", "");

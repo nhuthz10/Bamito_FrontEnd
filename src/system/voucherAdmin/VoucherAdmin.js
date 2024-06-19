@@ -6,18 +6,29 @@ import {
   fetchAllVoucherRedux,
   loadingAdmin,
 } from "../../redux-toolkit/adminSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import GridData from "../../components/gridData";
+import { LIMIT } from "../../utils";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 function VoucherAdmin() {
   const dispatch = useDispatch();
+  const page = useSelector((state) => state.pagination.page);
+  const totalPage = useSelector((state) => state.admin.allVoucher?.totalPage);
 
-  const handleDelete = async (voucher) => {
+  const handleDelete = async (voucher, isLast) => {
     try {
       dispatch(loadingAdmin(true));
       let res = await handleDeleteVoucher(voucher.id);
       if (res && res.errCode === 0) {
-        await dispatch(fetchAllVoucherRedux());
+        await dispatch(
+          fetchAllVoucherRedux({
+            limit: LIMIT,
+            page: totalPage === page && isLast ? page - 1 : page,
+            pagination: true,
+          })
+        );
+        if (totalPage === page && isLast) dispatch(handleChangePage(page - 1));
         toast.success("Xóa voucher thành công");
       }
     } catch (err) {

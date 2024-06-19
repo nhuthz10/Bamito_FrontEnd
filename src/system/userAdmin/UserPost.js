@@ -40,18 +40,14 @@ function UserPost() {
     if (path[3] === "create") {
       try {
         dispatch(loadingAdmin(true));
-        let access_token = localStorage.getItem("access_token");
-        let res = await handleCreateANewUserService(
-          {
-            email: dataSubmit.email,
-            userName: dataSubmit.username,
-            password: dataSubmit.password,
-            phoneNumber: dataSubmit.phone,
-            address: dataSubmit.address,
-            roleId: dataSubmit.roleId,
-          },
-          access_token
-        );
+        let res = await handleCreateANewUserService({
+          email: dataSubmit.email,
+          userName: dataSubmit.username,
+          password: dataSubmit.password,
+          phoneNumber: dataSubmit.phone,
+          address: dataSubmit.address,
+          roleId: dataSubmit.roleId,
+        });
         if (res && res.errCode === 0) {
           toast.success("Thêm khách hàng thành công");
           setValue("username", "");
@@ -77,19 +73,15 @@ function UserPost() {
     } else if (path[3] === "edit") {
       try {
         dispatch(loadingAdmin(true));
-        let access_token = localStorage.getItem("access_token");
-        let res = await handleUpdateUser(
-          {
-            id: data.id,
-            email: dataSubmit.email,
-            userName: dataSubmit.username,
-            password: dataSubmit.password,
-            phoneNumber: dataSubmit.phone,
-            address: dataSubmit.address,
-            roleId: dataSubmit.roleId,
-          },
-          access_token
-        );
+        let res = await handleUpdateUser({
+          id: data.id,
+          email: dataSubmit.email,
+          userName: dataSubmit.username,
+          password: dataSubmit.password,
+          phoneNumber: dataSubmit.phone,
+          address: dataSubmit.address,
+          roleId: dataSubmit.roleId,
+        });
         if (res && res.errCode === 0) {
           toast.success("Cập nhật thông tin người dùng thành công");
           navigate(`/admin/${path_constant.USER_ADMIN}`);

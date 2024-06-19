@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import {
   handleGetAllProductTypeService,
   handleGetProductName,
 } from "../../services/productService";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 import { useDispatch } from "react-redux";
 
 import "./breadcrumb.scss";
@@ -57,7 +54,6 @@ function Breadcrumb() {
 
   const handleClickCrumb = () => {
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
     dispatch(handleFilterProduct({ brandId: [], price: [0, 10000000] }));
   };
 

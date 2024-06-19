@@ -18,10 +18,7 @@ import avatarDefault from "../../assets/default-avatar.png";
 import { handleGetAllProductTypeService } from "../../services/productService";
 import UserMenu from "../../components/userMenu";
 import Search from "../../components/Search/Search";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 import { USER_MENU } from "../../utils/menu";
 import TippyCart from "../../components/TippyCart/TippyCart";
 
@@ -45,7 +42,6 @@ const ProductTypesMenu = () => {
 
   const handleChangProductType = (productTypeId) => {
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
     navigate(`/product/${productTypeId}`);
   };
 
@@ -87,7 +83,6 @@ function Header() {
 
   let handleClickSaleOff = () => {
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
     navigate("/product/sale-off");
   };
 

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { handleGetAllProductCart } from "../services/productService";
+import { handleGetAllProductCart } from "../services/cartService";
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -11,7 +11,7 @@ export const fetchAllProductCart = createAsyncThunk(
   "cart/fetchAllProductCart",
   async (params, thunkAPI) => {
     try {
-      let res = await handleGetAllProductCart(params.cartId);
+      let res = await handleGetAllProductCart(params.userId);
       if (res && res.errCode === 0) {
         thunkAPI.dispatch(fetchAllProductCartSuccess(res?.data));
       }

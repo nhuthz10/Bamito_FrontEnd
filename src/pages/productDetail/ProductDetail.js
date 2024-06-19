@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "./productDetail.scss";
 import { loadingProduct } from "../../redux-toolkit/productSlice";
-import {
-  handleGetProductService,
-  hadnleAddProductToCart,
-} from "../../services/productService";
+import { hadnleAddProductToCart } from "../../services/cartService";
+import { handleGetProductService } from "../../services/productService";
 import CommentAndRatingForm from "./CommentAndRatingForm";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -119,7 +117,7 @@ function ProductDetail() {
               (product.price - (product.price * product.discount) / 100),
           });
           if (res && res.errCode === 0) {
-            dispatch(fetchAllProductCart({ cartId: cartId }));
+            dispatch(fetchAllProductCart({ userId: userId }));
             toast.success("Thêm sản phẩm vào giỏ hàng thành công");
           }
         } catch (error) {

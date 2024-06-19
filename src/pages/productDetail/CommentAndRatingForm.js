@@ -74,7 +74,7 @@ function CommentAndRatingForm() {
 
   let handleDeleteFeedback = async (id) => {
     try {
-      let res = await handleDeleteFeedbackService(id);
+      let res = await handleDeleteFeedbackService(id, userId);
       if (res && res.errCode === 0) {
         getAllDataFeedback();
         toast.success("Xóa đánh giá thành công");
@@ -127,7 +127,7 @@ function CommentAndRatingForm() {
                       )
                     }
                   >
-                    Chính sửa
+                    Chỉnh sửa
                   </div>
                   <div
                     className="edit-feedback-btn"

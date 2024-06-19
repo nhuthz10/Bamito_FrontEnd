@@ -15,10 +15,7 @@ import { useDebounce } from "../../utils/commonUtils";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { handleChangSearchText } from "../../redux-toolkit/searchSlice";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
   style: "decimal",
@@ -78,7 +75,7 @@ const Search = () => {
   const handleClickPopular = (popularValue) => {
     setIsShowSearch(false);
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
+
     dispatch(handleChangSearchText(popularValue));
     navigate("/product/search");
   };

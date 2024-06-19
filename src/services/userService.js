@@ -2,13 +2,7 @@ import axios from "../axios";
 import { axiosJWT } from "../axios";
 
 let handleLoginService = (email, password) => {
-  return axios.post(
-    "/api/user/login",
-    { email: email, password: password },
-    {
-      withCredentials: true,
-    }
-  );
+  return axios.post("/api/user/login", { email: email, password: password });
 };
 
 let handleRefershTokenService = async (refresh_token) => {
@@ -23,24 +17,16 @@ let handleRefershTokenService = async (refresh_token) => {
   );
 };
 
-let handleGetUserAfterLoginService = async (access_token, userId) => {
-  return await axios.get(`/api/user/get-user-infor?userId=${userId}`, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+let handleGetUserAfterLoginService = async (userId) => {
+  return await axiosJWT.get(`/api/user/get-user-infor?userId=${userId}`);
 };
 
 let handleRegisterService = (data) => {
   return axios.post("/api/user/register", data);
 };
 
-let handleCreateANewUserService = (data, access_token) => {
-  return axiosJWT.post("/api/user/create-user", data, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+let handleCreateANewUserService = (data) => {
+  return axiosJWT.post("/api/user/create-user", data);
 };
 
 let handleSendOptService = (email) => {
@@ -51,73 +37,44 @@ let handleChangePasswordService = (data) => {
   return axios.put("/api/user/change-password", data);
 };
 
-let handleGetInforUserService = (id, access_token) => {
-  return axiosJWT.get(`/api/user/get-user?id=${id}`, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+let handleGetInforUserService = (id) => {
+  return axiosJWT.get(`/api/user/get-user?id=${id}`);
 };
 
-let handleUpdateUser = (data, access_token) => {
-  return axiosJWT.put("/api/user/update-user", data, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+let handleUpdateUser = (data) => {
+  return axiosJWT.put("/api/user/update-user", data);
 };
 
-let handleChangePasswordProfile = (data, access_token) => {
-  return axiosJWT.put("/api/user/change-password-profile", data, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+let handleChangePasswordProfile = (data) => {
+  return axiosJWT.put("/api/user/change-password-profile", data);
 };
 
-let handleGetAllUserService = (limit, page, name, access_token) => {
+let handleGetAllUserService = (limit, page, name) => {
   return axiosJWT.get(
-    `/api/user/get-all-user?limit=${limit}&page=${page}&name=${name}`,
-    {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    }
+    `/api/user/get-all-user?limit=${limit}&page=${page}&name=${name}`
   );
 };
 
-let handleDeleteService = (id, access_token) => {
-  return axiosJWT.delete(`/api/user/delete-user?id=${id}`, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+let handleDeleteService = (id) => {
+  return axiosJWT.delete(`/api/user/delete-user?id=${id}`);
 };
 
-let handleGetAllRoleService = (access_token) => {
-  return axiosJWT.get(`/api/user/get-all-role`, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+let handleGetAllRoleService = () => {
+  return axiosJWT.get(`/api/user/get-all-role`);
 };
 
 let handleCreateFavourite = (data) => {
-  return axios.post("/api/favourite/create-favourite", data);
+  return axiosJWT.post("/api/favourite/create-favourite", data);
 };
 
 let handleDeleteFavourite = (userId, productId) => {
-  return axios.delete(
+  return axiosJWT.delete(
     `/api/favourite/delete-favourite?userId=${userId}&productId=${productId}`
   );
 };
 
 let handleGetAllFavourite = (userId) => {
-  return axios.get(`/api/favourite/get-all-favourite?userId=${userId}`);
-};
-
-let handleCreatCart = (data) => {
-  return axios.post("/api/cart/create-cart", data);
+  return axiosJWT.get(`/api/favourite/get-all-favourite?userId=${userId}`);
 };
 
 export {
@@ -135,7 +92,6 @@ export {
   handleCreateFavourite,
   handleDeleteFavourite,
   handleGetAllFavourite,
-  handleCreatCart,
   handleRefershTokenService,
   handleGetUserAfterLoginService,
 };

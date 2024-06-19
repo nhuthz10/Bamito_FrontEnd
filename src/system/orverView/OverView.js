@@ -7,7 +7,7 @@ import Chart from "../../components/chart/Chart";
 import revenueImg from "../../assets/image 29.png";
 import orderImg from "../../assets/image 28.png";
 import productImg from "../../assets/image 27.png";
-import { handleGetAllOrderStatistics } from "../../services/productService";
+import { handleGetAllOrderStatistics } from "../../services/orderService";
 import img34 from "../../assets/image 34.png";
 import img35 from "../../assets/image 35.png";
 import img36 from "../../assets/image 36.png";

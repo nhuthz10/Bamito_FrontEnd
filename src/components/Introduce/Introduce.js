@@ -10,10 +10,7 @@ import { handleGetAllProductOfTheProductType } from "../../services/productServi
 import { toast } from "react-toastify";
 import Rating from "@mui/material/Rating";
 import { useNavigate } from "react-router-dom";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 import { updateFavourites } from "../../redux-toolkit/userSlice";
 import {
   handleCreateFavourite,
@@ -123,7 +120,6 @@ const Introduce = ({ productTypesData }) => {
 
   const handleClickMore = (productTypeId) => {
     dispatch(handleChangePage(1));
-    dispatch(handleResetPagination(true));
     navigate(`product/${productTypeId}`);
   };
 

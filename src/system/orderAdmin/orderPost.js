@@ -6,17 +6,14 @@ import {
   handleDeliveringOrderService,
   handleSucceedOrderService,
   handleDeleteOrderService,
-} from "../../services/productService";
+} from "../../services/orderService";
 import "./OrderPost.scss";
 import dayjs from "dayjs";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  handleChangePage,
-  handleResetPagination,
-} from "../../redux-toolkit/paginationSlice";
+import { handleChangePage } from "../../redux-toolkit/paginationSlice";
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
   style: "decimal",
@@ -26,12 +23,14 @@ const currencyFormatter = new Intl.NumberFormat("vi-VN", {
 
 function OrderPost() {
   const [orderDetailData, setOrderDetailData] = useState({});
+  const userId = useSelector((state) => state.user.userInfo?.id);
+
   let { orderId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let getOrderDeatil = async () => {
     try {
-      let res = await handleGetOrderDetailService(orderId);
+      let res = await handleGetOrderDetailService(orderId, userId);
       if (res && res.errCode === 0) {
         setOrderDetailData(res?.data);
       }
@@ -48,11 +47,14 @@ function OrderPost() {
 
   let handleDeliveringOrder = async () => {
     try {
-      let res = await handleDeliveringOrderService(orderId);
+      let res = await handleDeliveringOrderService({
+        userId: userId,
+        orderId: orderId,
+      });
       if (res && res.errCode === 0) {
         toast.success("Xác nhận đơn hàng thành công");
         dispatch(handleChangePage(1));
-        dispatch(handleResetPagination(true));
+
         navigate("/admin/order-waiting");
       }
     } catch (error) {
@@ -63,11 +65,14 @@ function OrderPost() {
 
   let handleSucceedOrder = async () => {
     try {
-      let res = await handleSucceedOrderService(orderId);
+      let res = await handleSucceedOrderService({
+        userId: userId,
+        orderId: orderId,
+      });
       if (res && res.errCode === 0) {
         toast.success("Xác nhận đơn hàng đã giao thành công");
         dispatch(handleChangePage(1));
-        dispatch(handleResetPagination(true));
+
         navigate("/admin/order-delivery");
       }
     } catch (error) {
@@ -82,7 +87,7 @@ function OrderPost() {
       if (res && res.errCode === 0) {
         toast.success("Xóa đơn hàng thành công");
         dispatch(handleChangePage(1));
-        dispatch(handleResetPagination(true));
+
         navigate("/admin/order-canceled");
       }
     } catch (error) {
