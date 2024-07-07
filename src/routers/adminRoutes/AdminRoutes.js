@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import Error from "../../pages/error/Error";
 import OverView from "../../system/orverView/OverView";
@@ -21,8 +21,16 @@ import VoucherPost from "../../system/voucherAdmin/VoucherPost";
 import OrderAdmin from "../../system/orderAdmin/orderAdmin";
 import OrderPost from "../../system/orderAdmin/orderPost";
 import ReportAdmin from "../../system/reportAdmin/ReportAdmin";
+import { useSelector } from "react-redux";
 
 function AdminRoutes() {
+  const navigate = useNavigate();
+  const login = useSelector((state) => state.user.login);
+  useEffect(() => {
+    if (!login) {
+      navigate(path.HOME);
+    }
+  }, [login, navigate]);
   return (
     <Routes>
       <Route path={path.OVERVIEW_ADMIN} element={<OverView />} />

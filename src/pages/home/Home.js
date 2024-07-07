@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import { toast } from "react-toastify";
 import "./Home.scss";
 import { handleGetAllProductTypeService } from "../../services/productService";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loadingProduct } from "../../redux-toolkit/productSlice";
 
 function Home() {

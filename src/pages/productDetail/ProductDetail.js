@@ -31,10 +31,9 @@ function ProductDetail() {
   const [stockQuantity, setStockQuantity] = useState(null);
   const isLogin = useSelector((state) => state.user.login);
   const userId = useSelector((state) => state.user.userInfo.id);
-  const cartId = useSelector((state) => state.user.cartId);
   const dispatch = useDispatch();
 
-  const { productId } = useParams();
+  const { productId, productTypeId } = useParams();
 
   const [product, setProduct] = useState({});
 

@@ -12,7 +12,6 @@ const currencyFormatter = new Intl.NumberFormat("vi-VN", {
 });
 
 const TippyCart = () => {
-  const cartId = useSelector((state) => state?.user?.cartId);
   const userId = useSelector((state) => state.user.userInfo?.id);
   const products = useSelector((state) => state?.cart?.allProduct);
   const productCountInCart = useSelector((state) => state.cart?.totalProduct);

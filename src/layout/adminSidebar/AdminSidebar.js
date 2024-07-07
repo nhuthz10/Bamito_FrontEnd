@@ -104,19 +104,6 @@ function AdminSidebar() {
   const [selectedProductItem, setSelectedProductItem] = useState(false);
   const [selectedOrderItem, setSelectedOrderItem] = useState(false);
 
-  // useEffect(() => {
-  //   const crumb = crumbs.find(
-  //     (item) =>
-  //       item === "product" ||
-  //       item === "product-type" ||
-  //       item === "product-size" ||
-  //       item === "product-brand"
-  //   );
-  //   if (crumb) {
-  //     setSelectedProductItem(true);
-  //   }
-  // }, [crumbs]);
-
   const handleClickMenuItem = (id, path) => {
     dispatch(handleChangePage(1));
     navigate(path);
@@ -136,9 +123,9 @@ function AdminSidebar() {
       <div className="menu">
         {MENU.map((item) => {
           const Icon = item.icon;
-          var Component = "div";
-          var selectedSubItem = null;
-          var props = {
+          let Component = "div";
+          let selectedSubItem = null;
+          let props = {
             onClick: () => handleClickMenuItem(item.id, item.path),
           };
           if (item.id === "product-parent") {

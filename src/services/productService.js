@@ -20,7 +20,7 @@ let handleDeleteProductTypeService = (id) => {
 };
 
 let handleGetAllBrandService = (limit, page, name, pagination) => {
-  return axiosJWT.get(
+  return axios.get(
     `/api/brand/get-all-brand?limit=${limit}&page=${page}&name=${name}&pagination=${pagination}`
   );
 };

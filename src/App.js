@@ -13,43 +13,9 @@ import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import AdminLayout from "./layout/adminLayout/AdminLayout";
 import AdminRoutes from "./routers/adminRoutes/AdminRoutes.js";
 import ChangePassword from "./pages/changePassword/ChangePassword";
-import { jwtDecode } from "jwt-decode";
-import { axiosJWT } from "./axios.js";
 import { path } from "./utils";
-import { toast } from "react-toastify";
-import { logOut } from "./redux-toolkit/userSlice";
-import { useDispatch } from "react-redux";
-import { handleRefershTokenService } from "./services/userService.js";
 
 function App() {
-  const dispatch = useDispatch();
-
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      let access_token = localStorage.getItem("access_token");
-      let refresh_token = localStorage.getItem("refresh_token");
-      const currentTime = new Date();
-      const decoded = jwtDecode(access_token);
-      const decodedRefreshToken = jwtDecode(refresh_token);
-      if (decoded?.exp < currentTime.getTime() / 1000) {
-        if (decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
-          const res = await handleRefershTokenService(refresh_token);
-          localStorage.setItem("access_token", res.access_token);
-          config.headers["Authorization"] = `Bearer ${res.access_token}`;
-        } else {
-          dispatch(logOut());
-          toast.error("Phiên bản đăng nhập đã hết hạn");
-        }
-      } else {
-        config.headers["Authorization"] = `Bearer ${access_token}`;
-      }
-      return config;
-    },
-    (err) => {
-      return Promise.reject(err);
-    }
-  );
-
   return (
     <div>
       <Routes>
